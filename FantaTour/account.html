@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tài khoản của tôi</title>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/grid.css">
+  <link rel="stylesheet" href="./assets/css/main.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7fa;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px; /* Tăng max-width để có không gian cho nút */
+      margin: 40px auto;
+      padding: 70px;
+      overflow: visible; /* Đảm bảo nút không bị cắt */
+    }
+
+    .account-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 20px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 40px;
+    }
+
+    .account-card h2 {
+      margin-bottom: 20px;
+      color: #0a3d62;
+      font-size: 23px;
+      font-weight: 600;
+     
+    }
+
+    .account-info p {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    /* Tour Section Styles */
+    .tour-section {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 0;
+      width: 100%;
+    }
+
+    .tour-section h3 {
+      margin-bottom: 20px;
+      color: #0a3d62;
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      padding-left: 20px;
+    }
+
+    .slider-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 0 60px; /* Tăng padding để nút hiển thị rõ */
+      width: 100%;
+      overflow: visible;
+      box-sizing: border-box;
+    }
+
+    .tour-slider {
+      display: flex;
+      overflow-x: hidden;
+      gap: 20px;
+      padding: 10px 0;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      width: 100%;
+    }
+
+    .tour-slider::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tour-card {
+      flex: 0 0 320px;
+      background: linear-gradient(145deg, #ffffff, #f9fafb);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      scroll-snap-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .tour-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .tour-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .tour-card:hover .tour-img {
+      transform: scale(1.02);
+    }
+
+    .tour-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a3d62;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .tour-details {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #444;
+    }
+
+    .tour-details strong {
+      color: #222;
+    }
+
+    .slider-btn {
+      background: #0a3d62;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 22px;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      position: absolute;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .slider-btn:hover {
+      background: #0c4f82;
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .prev-btn {
+      left: 10px;
+    }
+
+    .next-btn {
+      right: 10px;
+    }
+
+    .slider-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: translateY(-50%);
+    }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #ccc;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .dot.active {
+      background: #0a3d62;
+    }
+
+    .total-cost {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #c0392b;
+      text-align: right;
+      padding-right: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .tour-card {
+        flex: 0 0 280px;
+      }
+
+      .slider-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
+      }
+
+      .slider-wrapper {
+        padding: 0 50px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .tour-card {
+        flex: 0 0 85%;
+      }
+
+      .slider-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+      }
+
+      .slider-wrapper {
+        padding: 0 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .slider-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+      }
+
+      .slider-wrapper {
+        padding: 0 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <header class="header">
+      <!-- Navbar -->
+      <nav class="navbar">
+        <div class="grid wide">
+          <div class="navbar-wrap row">
+            <!-- Logo -->
+            <div class="col l-2 m-6 c-6">
+              <a href="../index.html" class="header__logo-link">
+                <img src="./assets/img/logo.png" alt="" class="header__logo-img">
+              </a>
+            </div>
+
+            <!-- Navbar Items -->
+            <div class="col l-9 m-0 c-0">
+              <ul class="navbar__list">
+                <li class="navbar__item">
+                  <a href="../index.html" class="navbar__item-link">Trang chủ</a>
+                </li>
+                <li class="navbar__item">
+                  <a href="#" class="navbar__item-link">Tour trong nước</a>
+                  <ul class="navbar__subnav">
+                    <li class="subnav__item subnav__item--hot">
+                      <a href="MienBac.html" class="subnav__item-link">Miền Bắc</a>
+                    </li>
+                    <li class="subnav__item">
+                      <a href="MienTrung.html" class="subnav__item-link">Miền Trung</a>
+                    </li>
+                    <li class="subnav__item">
+                      <a href="MienNam.html" class="subnav__item-link">Miền Nam</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="navbar__item">
+                  <a href="#" class="navbar__item-link">Dịch vụ du lịch</a>
+                  <ul class="navbar__subnav">
+                    <li class="subnav__item">
+                      <a href="ThueXe.html" class="subnav__item-link">Thuê xe</a>
+                    </li>
+                    <li class="subnav__item">
+                      <a href="VeMayBay.html" class="subnav__item-link">Vé máy bay</a>
+                    </li>
+                    <li class="subnav__item">
+                      <a href="404error.html" class="subnav__item-link">Coupon du lịch</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="navbar__item">
+                  <a href="FantaTour.html" class="navbar__item-link">Về chúng tôi</a>
+                </li>
+                <li class="navbar__item">
+                  <a href="#" class="navbar__item-link">Liên hệ</a>
+                  <ul class="navbar__subnav">
+                    <li class="subnav__item">
+                      <a href="cskh.html" class="subnav__item-link">CSKH</a>
+                    </li>
+                    <li class="subnav__item">
+                      <a href="feedback.html" class="subnav__item-link">Feedback</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="navbar__item navbar__item--booking">
+                  <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
+                </li>
+                <li class="navbar__item navbar__item--booking auth-container">
+                  <a href="account.html" class="navbar__item-link">Tài khoản</a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Offcanvas Menu -->
+            <div class="col l-1 m-0 c-0">
+              <div class="navbar__menu-wrapper">
+                <label for="navbar__menu-input" class="navbar__menu-icon fas fa-bars"></label>
+                <input type="checkbox" name="" id="navbar__menu-input" hidden>
+                <div class="navbar__menu">
+                  <div class="navbar__menu-close">
+                    <label for="navbar__menu-input" class="fas fa-times navbar__menu-close-icon"></label>
+                  </div>
+                  <div class="navbar__menu-info">
+                    <ul class="navbar__menu-list">
+                      <div class="navbar__menu-head">
+                        <h3 class="navbar__menu-heading">
+                          <span>Tour đã đặt</span>
+                        </h3>
+                      </div>
+                      <div id="booked-tours-menu"></div>
+                      <div class="total-cost" style="margin-top: 20px; font-weight: bold; color: #c0392b;">
+                        Tổng chi: <span id="menu-total-cost">0</span> ₫
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="account-card">
+        <h2>Thông tin tài khoản</h2>
+        <div class="account-info">
+          <p><strong>Họ tên:</strong> <span id="accountName">Đang tải...</span></p>
+          <br>
+          <p style="line-height: 15px;"><strong>Email:</strong> <span id="accountEmail">Đang tải...</span></p>
+        </div>
+      </div>
+
+      <div class="tour-section">
+        <h3>Các tour đã đặt</h3>
+        <div class="slider-wrapper">
+          <button class="slider-btn prev-btn" aria-label="Previous slide">❮</button>
+          <div class="tour-slider" id="tourSlider">
+            <div class="tour-card">Chưa có tour nào được đặt</div>
+          </div>
+          <button class="slider-btn next-btn" aria-label="Next slide">❯</button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+        <div class="total-cost">Tổng chi: <span id="totalCost">0</span> ₫</div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./assets/js/main.js"></script>
+
+  <script>
+    // Khởi tạo Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAfS9qjdI-zZ5a8z9IlfuA83ilukZrDcFY",
+      authDomain: "nhi06-c8375.firebaseapp.com",
+      projectId: "nhi06-c8375",
+      storageBucket: "nhi06-c8375.appspot.com",
+      messagingSenderId: "620088727553",
+      appId: "1:620088727553:web:36d5768da11677bf338800"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        try {
+          // Lấy thông tin người dùng từ Firestore
+          const doc = await db.collection("users").doc(user.uid).get();
+          const data = doc.data();
+
+          // Hiển thị thông tin tài khoản
+          document.getElementById("accountName").textContent = user.displayName || data?.name || "Người dùng";
+          document.getElementById("accountEmail").textContent = user.email;
+
+          // Lấy danh sách tour đã đặt
+          const tourSlider = document.getElementById("tourSlider");
+          const bookedToursMenu = document.getElementById("booked-tours-menu");
+          const sliderDots = document.getElementById("sliderDots");
+          tourSlider.innerHTML = ""; // Xóa nội dung mặc định
+          bookedToursMenu.innerHTML = ""; // Xóa nội dung mặc định
+          sliderDots.innerHTML = ""; // Xóa dots mặc định
+
+          let totalCost = 0;
+
+          const querySnapshot = await db.collection("users").doc(user.uid).collection("bookedTours")
+            .orderBy("bookedAt", "desc")
+            .get();
+
+          if (querySnapshot.empty) {
+            tourSlider.innerHTML = '<div class="tour-card">Chưa có tour nào được đặt</div>';
+            bookedToursMenu.innerHTML = '<li class="navbar__menu-item">Chưa có tour nào được đặt</li>';
+            document.getElementById("totalCost").textContent = "0";
+            document.getElementById("menu-total-cost").textContent = "0";
+            return;
+          }
+
+          // Tạo tour cards và dots
+          querySnapshot.forEach((doc, index) => {
+            const tour = doc.data();
+            totalCost += tour.total;
+
+            // Thêm vào tour-slider
+            const card = document.createElement("div");
+            card.className = "tour-card";
+            card.innerHTML = `
+              <img src="${tour.image}" class="tour-img" alt="${tour.title}" />
+              <div class="tour-title">${tour.title}</div>
+              <div class="tour-details">
+                <strong>Khởi hành:</strong> ${tour.departureDate}<br>
+                <strong>Số khách:</strong> ${tour.guests}<br>
+                <strong>Giá:</strong> ${formatCurrency(tour.total)} ₫
+              </div>
+            `;
+            tourSlider.appendChild(card);
+
+            // Thêm dot
+            const dot = document.createElement("div");
+            dot.className = `dot ${index === 0 ? "active" : ""}`;
+            dot.dataset.index = index;
+            sliderDots.appendChild(dot);
+
+            // Thêm vào offcanvas menu
+            const menuItem = document.createElement("li");
+            menuItem.className = "navbar__menu-item";
+            menuItem.innerHTML = `
+              <div style="background-image: url(${tour.image});" class="navbar__menu-item-img"></div>
+              <div class="navbar__menu-item-info">
+                <span class="navbar__menu-item-city">${tour.title}</span>
+                <span class="navbar__menu-item-price" style="--background-color:var(--yellow-grad)">${formatCurrency(tour.total)} ₫</span>
+              </div>
+            `;
+            bookedToursMenu.appendChild(menuItem);
+          });
+
+          // Cập nhật tổng chi
+          document.getElementById("totalCost").textContent = formatCurrency(totalCost);
+          document.getElementById("menu-total-cost").textContent = formatCurrency(totalCost);
+
+          // Điều khiển slider
+          const prevBtn = document.querySelector(".prev-btn");
+          const nextBtn = document.querySelector(".next-btn");
+          const dots = document.querySelectorAll(".dot");
+
+          function updateSliderState() {
+            const cardWidth = tourSlider.querySelector(".tour-card").offsetWidth + 20; // Bao gồm gap
+            const scrollPosition = tourSlider.scrollLeft;
+            const maxScroll = tourSlider.scrollWidth - tourSlider.clientWidth;
+            const activeIndex = Math.round(scrollPosition / cardWidth);
+
+            // Cập nhật dots
+            dots.forEach((dot, i) => {
+              dot.classList.toggle("active", i === activeIndex);
+            });
+
+            prevBtn.disabled = scrollPosition <= 0;
+            nextBtn.disabled = scrollPosition >= maxScroll - 1; // Tránh lỗi làm tròn
+          }
+
+          prevBtn.addEventListener("click", () => {
+            const cardWidth = tourSlider.querySelector(".tour-card").offsetWidth + 20;
+            tourSlider.scrollBy({ left: -cardWidth, behavior: "smooth" });
+          });
+
+          nextBtn.addEventListener("click", () => {
+            const cardWidth = tourSlider.querySelector(".tour-card").offsetWidth + 20;
+            tourSlider.scrollBy({ left: cardWidth, behavior: "smooth" });
+          });
+
+          sliderDots.addEventListener("click", (e) => {
+            if (e.target.classList.contains("dot")) {
+              const index = parseInt(e.target.dataset.index);
+              const cardWidth = tourSlider.querySelector(".tour-card").offsetWidth + 20;
+              tourSlider.scrollTo({ left: index * cardWidth, behavior: "smooth" });
+            }
+          });
+
+          tourSlider.addEventListener("scroll", updateSliderState);
+          window.addEventListener("resize", updateSliderState);
+          window.addEventListener("load", updateSliderState);
+        } catch (error) {
+          console.error("Lỗi khi lấy dữ liệu:", error);
+          tourSlider.innerHTML = '<div class="tour-card">Lỗi khi tải tour, vui lòng thử lại</div>';
+          bookedToursMenu.innerHTML = '<li class="navbar__menu-item">Lỗi khi tải tour, vui lòng thử lại</li>';
+          document.getElementById("totalCost").textContent = "0";
+          document.getElementById("menu-total-cost").textContent = "0";
+        }
+      } else {
+        // Chuyển hướng nếu chưa đăng nhập
+        window.location.href = "login.html";
+      }
+    });
+
+    // Hàm định dạng tiền tệ
+    function formatCurrency(number) {
+      return number.toLocaleString('vi-VN');
+    }
+  </script>
+</body>
+</html>

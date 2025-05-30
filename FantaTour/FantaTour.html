@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FantaTour</title>
+    <title>BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -19,6 +19,12 @@
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/about.css">
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <style>
    .container {
@@ -75,7 +81,7 @@
 <script src="./assets/js/countdown.js"></script>
 <script src="./assets/js/main.js"></script>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
 
@@ -85,7 +91,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -94,7 +100,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -147,8 +153,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                                <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -239,15 +245,15 @@
         <!-- Nội dung trang giới thiệu về FantaTour -->
         <div class="FantaTour">
             <section class="about-us">
-                <h5>Giới Thiệu Group bookworm</h5>
-                <p>Chúng tôi là Bookworm – một nhóm gồm 4 thành viên đam mê công nghệ và phát triển web. Nhóm được thành lập với mục tiêu xây dựng những giải pháp trực tuyến tiện ích, hiện đại, hướng đến trải nghiệm người dùng.</p>
+                <h5>Giới Thiệu Group BugFreeTrip</h5>
+                <p>Chúng tôi là BugFreeTrip – một nhóm gồm 4 thành viên đam mê công nghệ và phát triển web. Nhóm được thành lập với mục tiêu xây dựng những giải pháp trực tuyến tiện ích, hiện đại, hướng đến trải nghiệm người dùng.</p>
             </section>
         
             <section class="history">
                 <h6>Về Trang Web</h6>
-                <p>ABCTour là một trang web chuyên cung cấp dịch vụ đặt tour du lịch trực tuyến, mang đến trải nghiệm tiện lợi, nhanh chóng và đáng tin cậy cho người dùng yêu thích khám phá.
+                <p>BugFreeTrip là một trang web chuyên cung cấp dịch vụ đặt tour du lịch trực tuyến, mang đến trải nghiệm tiện lợi, nhanh chóng và đáng tin cậy cho người dùng yêu thích khám phá.
 
-                    Với phương châm "Đi dễ - Trải nghiệm chất", ABC giúp bạn dễ dàng tìm kiếm, so sánh và đặt các tour du lịch trong và ngoài nước chỉ với vài cú click. Từ những hành trình khám phá thiên nhiên hùng vĩ, đến các chuyến nghỉ dưỡng sang trọng hay trải nghiệm văn hoá độc đáo, ABC đều có giải pháp phù hợp cho mọi nhu cầu.</p>
+                    Với phương châm "Đi dễ - Trải nghiệm chất", BugFreeTrip giúp bạn dễ dàng tìm kiếm, so sánh và đặt các tour du lịch trong và ngoài nước chỉ với vài cú click. Từ những hành trình khám phá thiên nhiên hùng vĩ, đến các chuyến nghỉ dưỡng sang trọng hay trải nghiệm văn hoá độc đáo, BugFreeTrip đều có giải pháp phù hợp cho mọi nhu cầu.</p>
             </section>
         
             <section class="mission-values">
@@ -265,20 +271,20 @@
 
                 <div class="container">
                     <div class="left">
-                        <h1>Nguyễn Khánh Quốc</h1>
+                        <h1>Ngô Phạm Minh Hoàng</h1>
                         <p class="role">Đội trưởng</p>
                         <p class="desc">
                             Tôi là người năng động, luôn thích thú, chủ động tìm những công nghệ mới hiện nay.
                             Vì là người năng động nên cả ngày tôi chỉ cười, có lúc không.
                         </p>
                         <div class="socials">
-                            <a href="https://www.facebook.com/khanhquoc.nguyen.16503?locale=vi_VN"><i class="fab fa-facebook"></i></a>
-                            <a href="https://www.tiktok.com/@noinhovoboz"><i class="fab fa-tiktok"></i></a>
-                            <a href="https://www.instagram.com/_kquoc.w/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/hoang.ngo.660710?locale=vi_VN"><i class="fab fa-facebook"></i></a>
+                            <a href="https://www.tiktok.com/@hoangngo305"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://www.instagram.com/_npmh35_/"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
                     <div class="right">
-                        <img src="file:///C:/Users/ADMIN/OneDrive/Pictures/Saved%20Pictures/455666218_1030851878433358_7395198390668302314_n.jpg" alt="Ảnh cá nhân">
+                        <img src="assets/img/hoangngo.jpg" alt="Ảnh cá nhân">
                     </div>
                   
             </section>
@@ -287,31 +293,31 @@
 
             <div class="container">
                 <div class="left">
-                    <h1>Ngô Phạm Minh Hoàng</h1>
+                    <h1>Nguyễn Văn Hoàng</h1>
                     <p class="role">Thành viên</p>
                     <p class="desc">
                         Tôi là người đam mê đọc sách, luôn tìm thấy niềm vui trong từng trang viết và những kiến thức sâu sắc.
                         Tôi cũng thích tìm tòi, khám phá nhiều lĩnh vực khác nhau để không ngừng mở rộng hiểu biết và phát triển bản thân.
                     </p>
                     <div class="socials">
-                        <a href="https://www.facebook.com/hoang.ngo.660710?locale=vi_VN"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@hoangngo305"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.instagram.com/_npmh35_/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/nguyen.van.hoang.903146?locale=vi_VN"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.tiktok.com/@1x02tiktokboiz"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/_nghoangg103/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="right">
-                    <img src="assets/img/hoangngo.jpg" alt="Ảnh cá nhân">
+                    <img src="assets/img/hoangbin.jpg" alt="Ảnh cá nhân">
                 </div>
-              </section>  
-              <section class="achievements">
+            </section>  
+            <section class="achievements">
                 <h6>Thành Viên</h6>
 
             <div class="container">
                 <div class="left">
-                    <h1>Lê Thị Nhi</h1>
+                    <h1>Phan Huy Mạnh Hoài</h1>
                     <p class="role">Thành Viên</p>
                     <p class="desc">
-                        Tôi là một cô gái độc thân, nhiều tiền.
+                        Tôi là một chàng trai độc thân, nhiều tiền.
                         Lúc nào tôi cũng thấy áp lực với số tiền mình phải tiêu hàng ngày.
                     </p>
                     <div class="socials">
@@ -321,7 +327,7 @@
                     </div>
                 </div>
                 <div class="right">
-                    <img src="assets/img/nhi.jpg" alt="Ảnh cá nhân">
+                    <img src="assets/img/manhhoai.jpg" alt="Ảnh cá nhân">
                 </div>
               </section>  
               <section class="achievements">
@@ -329,7 +335,7 @@
 
             <div class="container">
                 <div class="left">
-                    <h1>Nguyễn Văn Hoàng</h1>
+                    <h1>Trần Thị Mỹ Ngọc</h1>
                     <p class="role">Thành Viên</p>
                     <p class="desc">
                         Tôi là người vui vẻ, hòa đồng, tôi thích đi chơi với bạn bè.
@@ -337,18 +343,18 @@
                     </p>
                     <div class="socials">
                         <a href="https://www.facebook.com/nguyen.van.hoang.903146?locale=vi_VN"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.tiktok.com/@noinhovoboz"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.tiktok.com/@1x02tiktokboiz"><i class="fab fa-tiktok"></i></a>
                         <a href="https://www.instagram.com/_nghoangg103/"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="right">
-                    <img src="file:///C:/Users/ADMIN/OneDrive/Pictures/Saved%20Pictures/455666218_1030851878433358_7395198390668302314_n.jpg" alt="Ảnh cá nhân">
+                    <img src="assets/img/myngoc.jpg" alt="Ảnh cá nhân">
                 </div>
               </section>  
         
             <section class="services">
                 <h6>Dịch vụ của chúng tôi</h6>
-                <p>ABCTour cung cấp nhiều loại hình du lịch đa dạng, phù hợp với mọi nhu cầu:</p>
+                <p>BugFreeTrip cung cấp nhiều loại hình du lịch đa dạng, phù hợp với mọi nhu cầu:</p>
                 <img src="./assets/img/logo.png" alt="FantaTour">
                 <ul>
                     <li><strong>Tour du lịch trong nước:</strong> Khám phá những danh lam thắng cảnh nổi tiếng của Việt Nam.</li>
@@ -361,7 +367,7 @@
         
             <section class="customer-policy">
                 <h6>Chính sách khách hàng</h6>
-                <p>ABCTour luôn cam kết mang đến những chính sách tốt nhất để đảm bảo quyền lợi khách hàng:</p>
+                <p>BugFreeTrip luôn cam kết mang đến những chính sách tốt nhất để đảm bảo quyền lợi khách hàng:</p>
                 <ul>
                     <li>Hoàn tiền 100% nếu tour bị hủy do lỗi của công ty.</li>
                     <li>Chính sách ưu đãi đặc biệt cho khách hàng thân thiết.</li>
@@ -372,7 +378,7 @@
         
             <section class="commitment">
                 <h6>Cam kết chất lượng</h6>
-                <p>ABCTour cam kết mang đến những trải nghiệm tuyệt vời nhất cho khách hàng:</p>
+                <p>BugFreeTrip cam kết mang đến những trải nghiệm tuyệt vời nhất cho khách hàng:</p>
                 <ul>
                     <li>Đội ngũ hướng dẫn viên chuyên nghiệp, giàu kinh nghiệm.</li>
                     <li>Dịch vụ chăm sóc khách hàng tận tâm, chu đáo.</li>
@@ -400,9 +406,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="./assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">ABCTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng ABCTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -497,7 +503,10 @@
         </footer>
     </main>
 
+          <script src="./assets/js/countdown.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
+
 
 </body>
 </html>

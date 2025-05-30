@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chăm sóc khách hàng - FantaTour</title>
+    <title>Chăm sóc khách hàng - BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="./assets/css/customer-service.css">
 </head>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
 
@@ -31,7 +31,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -40,7 +40,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -92,8 +92,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                                <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -186,9 +186,9 @@
             <div class="grid wide">
                 <div class="row">
                     <div class="col l-12 m-12 c-12">
-                        <h2 class="cskh__heading">Chăm Sóc Khách Hàng FantaTour</h2>
+                        <h2 class="cskh__heading">Chăm Sóc Khách Hàng BugFreeTrip</h2>
                         <p class="cskh__desc">
-                            Đội ngũ Chăm sóc Khách hàng của FantaTour luôn sẵn sàng hỗ trợ bạn 24/7. Chúng tôi cam kết lắng nghe và giải đáp mọi thắc mắc để mang lại cho bạn trải nghiệm tốt nhất.
+                            Đội ngũ Chăm sóc Khách hàng của BugFreeTrip luôn sẵn sàng hỗ trợ bạn 24/7. Chúng tôi cam kết lắng nghe và giải đáp mọi thắc mắc để mang lại cho bạn trải nghiệm tốt nhất.
                         </p>
                     </div>
                 </div>
@@ -202,13 +202,13 @@
                             <p class="cskh__info-text">0909 123 456 (Miễn phí cước gọi)</p>
         
                             <h3 class="cskh__info-heading"><i class="fas fa-envelope"></i> Email</h3>
-                            <p class="cskh__info-text">cskh@fantatour.vn</p>
+                            <p class="cskh__info-text">cskh@BugFreeTrip.vn</p>
         
                             <h3 class="cskh__info-heading"><i class="fas fa-clock"></i> Thời gian làm việc</h3>
                             <p class="cskh__info-text">Từ thứ 2 - Chủ nhật | 8:00 AM - 10:00 PM</p>
         
                             <h3 class="cskh__info-heading"><i class="fas fa-map-marker-alt"></i> Văn phòng giao dịch</h3>
-                            <p class="cskh__info-text">10/80c Song Hành Xa Lộ Hà Nội, Phường Tân Phú, Thủ Đức, Hồ Chí Minh</p>
+                            <p class="cskh__info-text">136 Đường Trần Đại Nghĩa Quảng Nam 550000 Đà Nẵng</p>
                         </div>
                     </div>
                 </div>
@@ -267,9 +267,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="./assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">FantaTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng FantaTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -364,7 +364,8 @@
         </footer>
     </main>
 
+     <script src="./assets/js/countdown.js"></script>
     <script src="./assets/js/main.js"></script>
-
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>

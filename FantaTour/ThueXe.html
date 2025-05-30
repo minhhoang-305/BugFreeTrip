@@ -3,7 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dịch vụ thuê xe - FantaTour</title>
+    <title>Dịch vụ thuê xe - BugFreeTrip</title>
+    <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<!-- Cung cấp icon miễn phí như Facebook, Insta, điện thoại,... -->
+<!-- <i class="fas fa-phone"></i> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+
+<!-- CSS Files --><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dịch vụ thuê xe - BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -24,8 +40,10 @@
 <!-- JS Files -->
 <script src="./assets/js/countdown.js"></script>
 <script src="./assets/js/main.js"></script>
-
-<body>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
 
@@ -35,7 +53,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -44,7 +62,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -97,8 +115,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                                 <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -197,8 +215,8 @@
                 <div class="text">
                     <h2>Giới Thiệu</h2>
                     <p>
-                        FantaTour là đối tác uy tín cho thuê xe du lịch tại Việt Nam. Với đội ngũ xe đa dạng từ 7 chỗ, 16 chỗ, 30 chỗ đến 45 chỗ, chúng tôi cam kết mang đến cho quý khách hàng những trải nghiệm du lịch tuyệt vời nhất, thoải mái và an toàn. <br><br>
-                        Với tinh thần chuyên nghiệp, tận tâm và đội ngũ nhân viên giàu kinh nghiệm, FantaTour luôn đảm bảo mọi hành trình của bạn đều được diễn ra một cách suôn sẻ và an toàn. Hãy để FantaTour chăm sóc mọi nhu cầu di chuyển của bạn!
+                        BugFreeTrip là đối tác uy tín cho thuê xe du lịch tại Việt Nam. Với đội ngũ xe đa dạng từ 7 chỗ, 16 chỗ, 30 chỗ đến 45 chỗ, chúng tôi cam kết mang đến cho quý khách hàng những trải nghiệm du lịch tuyệt vời nhất, thoải mái và an toàn. <br><br>
+                        Với tinh thần chuyên nghiệp, tận tâm và đội ngũ nhân viên giàu kinh nghiệm, BugFreeTrip luôn đảm bảo mọi hành trình của bạn đều được diễn ra một cách suôn sẻ và an toàn. Hãy để BugFreeTrip chăm sóc mọi nhu cầu di chuyển của bạn!
                     </p>
                 </div>
                 <div class="image">
@@ -230,7 +248,7 @@
             </div>
             
             <div class="values-section">
-                <h2>Giá Trị Của FantaTour</h2>
+                <h2>Giá Trị Của BugFreeTrip-TRAVE</h2>
                 <div class="values">
                     <div class="value-item">
                         <img src="assets/img/business-deal.png" alt="Chuyen Nghiep Icon">
@@ -251,7 +269,7 @@
             </div>
             
             <div class="services-section">
-                <h2>Dịch Vụ Của FantaTour</h2>
+                <h2>Dịch Vụ Của BugFreeTrip-TRAVE</h2>
                 <div class="services">
                     <div class="service-item">
                         <img src="assets/img/car-alt.png" alt="Du Lich Icon">
@@ -275,7 +293,7 @@
                 <h2>Chất Lượng - Mục Tiêu Hàng Đầu</h2>
                 <p>Chất lượng là tiêu chí hàng đầu tạo nên sự khác biệt của dịch vụ của chúng tôi. Từ chọn lựa xe đến chăm sóc khách hàng, chúng tôi luôn đặt chất lượng lên hàng đầu. Đội ngũ tài xế kỳ cựu, xe hiện đại và bảo trì định kỳ là cam kết của chúng tôi để mang lại trải nghiệm tốt nhất cho mỗi hành khách.</p>
                 <div class="quality-testimonial">
-                    <p>"Dịch vụ của FantaTour thật sự xuất sắc! Tôi đã trải qua một hành trình du lịch vô cùng thoải mái và an toàn. Đội ngũ tài xế chuyên nghiệp, xe đẹp và sạch sẽ. Tôi hoàn toàn hài lòng và sẽ tiếp tục lựa chọn họ cho các chuyến đi tiếp theo của mình!"</p>
+                    <p>"Dịch vụ của BugFreeTrip thật sự xuất sắc! Tôi đã trải qua một hành trình du lịch vô cùng thoải mái và an toàn. Đội ngũ tài xế chuyên nghiệp, xe đẹp và sạch sẽ. Tôi hoàn toàn hài lòng và sẽ tiếp tục lựa chọn họ cho các chuyến đi tiếp theo của mình!"</p>
                     <span class="author">Nguyễn Khắc Minh Hiếu</span>
                     <span class="role">— Trưởng phòng Vận hành</span>
                 </div>
@@ -300,7 +318,7 @@
                     </div>
                     <div class="price">1.200.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-fortuner">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-fortuner">Thông Tin</button>
                     </div>
@@ -396,7 +414,7 @@
                     </div>
                     <div class="price">1.400.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                       <a href="Thuengay.html"> <button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-sedona">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-sedona">Thông Tin</button>
                     </div>
@@ -492,7 +510,7 @@
                     </div>
                     <div class="price">1.000.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-xpander">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-xpander">Thông Tin</button>
                     </div>
@@ -580,7 +598,7 @@
                     </div>
                     <div class="price">1.800.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-solati">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-solati">Thông Tin</button>
                     </div>
@@ -668,7 +686,7 @@
                     </div>
                     <div class="price">1.900.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                       <a href="Thuengay.html"> <button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-hiace">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-hiace">Thông Tin</button>
                     </div>
@@ -756,7 +774,7 @@
                     </div>
                     <div class="price">1.800.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button> </a>
                         <button class="preview-btn" data-modal="preview-modal-transit">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-transit">Thông Tin</button>
                     </div>
@@ -844,7 +862,7 @@
                     </div>
                     <div class="price">2.500.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                       <a href="Thuengay.html"> <button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-county">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-county">Thông Tin</button>
                     </div>
@@ -932,7 +950,7 @@
                     </div>
                     <div class="price">2.600.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"> <button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-samco">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-samco">Thông Tin</button>
                     </div>
@@ -1020,7 +1038,7 @@
                     </div>
                     <div class="price">3.000.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-universe">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-universe">Thông Tin</button>
                     </div>
@@ -1108,7 +1126,7 @@
                     </div>
                     <div class="price">2.900.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-town">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-town">Thông Tin</button>
                     </div>
@@ -1196,7 +1214,7 @@
                     </div>
                     <div class="price">3.500.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-aero">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-aero">Thông Tin</button>
                     </div>
@@ -1284,7 +1302,7 @@
                     </div>
                     <div class="price">3.000.000 VNĐ/ngày</div>
                     <div class="buttons">
-                        <button class="rent-btn">Thuê Ngay</button>
+                        <a href="Thuengay.html"><button class="rent-btn">Thuê Ngay</button></a>
                         <button class="preview-btn" data-modal="preview-modal-meadow">Xem Xe</button>
                         <button class="info-btn" data-modal="details-modal-meadow">Thông Tin</button>
                     </div>
@@ -1372,9 +1390,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="./assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">FantaTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng FantaTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -1497,5 +1515,51 @@
             });
         });
     </script>
+</body>
+</html>
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/vehicle-rental.css">
+</head>
+
+<!-- JS Files -->
+<script src="./assets/js/countdown.js"></script>
+<script src="./assets/js/main.js"></script>
+
+
+
+    <script src="./assets/js/main.js"></script>
+    <script>
+        // Mở popup
+        document.querySelectorAll('.preview-btn, .info-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.getAttribute('data-modal');
+                document.getElementById(modalId).style.display = 'flex';
+            });
+        });
+    
+        // Đóng popup
+        document.querySelectorAll('.close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            });
+        });
+    
+        // Đóng popup khi nhấp ra ngoài nội dung
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+     <script src="./assets/js/countdown.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
+
 </body>
 </html>

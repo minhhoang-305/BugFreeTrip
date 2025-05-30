@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FantaTour</title>
+    <title>BugFreeTrip</title>
     <link rel="shortcut icon" href="FantaTour/assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -18,12 +18,17 @@
     <link rel="stylesheet" href="FantaTour/assets/css/base.css">
     <link rel="stylesheet" href="FantaTour/assets/css/grid.css">
     <link rel="stylesheet" href="FantaTour/assets/css/main.css">
+
+    <!-- Thêm vào phần <head> của index.html -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header" style="z-index: 2;">
-
+            
             <!-- navbar -->
             <nav class="navbar" style="position: fixed;">
                 <div class="grid wide">
@@ -91,8 +96,10 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="FantaTour/DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="FantaTour/login.html" class="navbar__item-link">Đăng nhập</a>
+                                <li class="navbar__item navbar__item--booking auth-container">
+                                   
+                                            <a href="FantaTour/login.html" class="navbar__item-link">Đăng nhập</a>
+                                      
                                 </li>
                                 
                             </ul>
@@ -116,7 +123,7 @@
                                                 </h3>
                                             </div>
                                             <li class="navbar__menu-item">
-                                                <div style="background-image: url(./assets/img/HaNoi.jpeg);"
+                                                <div style="background-image: url(FantaTour/assets/img/HaNoi.jpeg);"
                                                     class="navbar__menu-item-img"></div>
                                                 <div class="navbar__menu-item-info">
                                                     <a href="FantaTour/HN-YT.html" class="navbar__menu-item-city">Hà Nội - Yên Tử</a>
@@ -131,7 +138,7 @@
                                             </li>
 
                                             <li class="navbar__menu-item">
-                                                <div style="background-image: url(./assets/img/Hue.jpg);"
+                                                <div style="background-image: url(FantaTour/assets/img/Hue.jpg);"
                                                     class="navbar__menu-item-img"></div>
                                                 <div class="navbar__menu-item-info">
                                                     <a href="FantaTour/H-QB.html" class="navbar__menu-item-city">Huế - Quảng Bình</a>
@@ -146,7 +153,7 @@
                                             </li>
 
                                             <li class="navbar__menu-item">
-                                                <div style="background-image: url(./assets/img/HCMC.jpeg);"
+                                                <div style="background-image: url(FantaTour/assets/img/HCMC.jpeg);"
                                                     class="navbar__menu-item-img"></div>
                                                 <div class="navbar__menu-item-info">
                                                     <a href="FantaTour/HCM.html" class="navbar__menu-item-city">TP.Hồ Chí Minh [Jog - Sup And Spa Saigon]</a>
@@ -163,7 +170,7 @@
 
                                         <div class="package">
                                             <div class="package-img"
-                                                style="background-image: url(./assets/img/topdanhlamthangcanh.jpg);">
+                                                style="background-image: url(FantaTour/assets/img/topdanhlamthangcanh.jpg);">
                                             </div>
                                             <div class="package-overlay">
                                                 <div class="package-info">
@@ -185,7 +192,7 @@
                 <div class="search__wrap">
                     <div class="search__head">
                         <h2>Tìm kỳ nghỉ lý tưởng</h2>
-                        <span>Xem khuyến mãi FantaTour</span>
+                        <span>Xem khuyến mãi BugFreeTrip</span>
                     </div>
                     <form action="" class="search__form">
                         <select id="destinationSelect" class="search__selection" onchange="navigateToPage()">
@@ -199,12 +206,12 @@
                             <option value="FantaTour/TayNguyen.html">&nbsp; Tây Nguyên</option>
                             <option value="FantaTour/NhaTrang.html">&nbsp; Nha Trang</option>
                             <option value="FantaTour/Hue.html">&nbsp; Huế</option>
-                            <option value="NgheAn.html">&nbsp; Nghệ An</option>
-                            <option value="MienNam.html">Miền Nam</option>
-                            <option value="PhuQuoc.html">&nbsp; Phú Quốc</option>
-                            <option value="MienTay.html">&nbsp; Miền Tây</option>
-                            <option value="ConDao.html">&nbsp; Côn Đảo</option>
-                            <option value="HoTram-VungTau.html">&nbsp; Hồ Tràm - Vũng Tàu</option>
+                            <option value="FantaTour/NgheAn.html">&nbsp; Nghệ An</option>
+                            <option value="FantaTour/MienNam.html">Miền Nam</option>
+                            <option value="FantaTour/PhuQuoc.html">&nbsp; Phú Quốc</option>
+                            <option value="FantaTour/MienTay.html">&nbsp; Miền Tây</option>
+                            <option value="FantaTour/ConDao.html">&nbsp; Côn Đảo</option>
+                            <option value="FantaTour/HoTram-VungTau.html">&nbsp; Hồ Tràm - Vũng Tàu</option>
                         </select>
                     </form>                    
 
@@ -723,9 +730,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="FantaTour/assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">FantaTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng FantaTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -751,7 +758,7 @@
                                 </li>
                                 <li class="footer__item">
                                     <i class="footer__item-icon fas fa-chevron-right"></i>
-                                    <a href="FantaTour/404error.html" class="footer__item-link">Du Lịch</a>
+                                    <a href="404error.html" class="footer__item-link">Du Lịch</a>
                                 </li>
                                 <li class="footer__item">
                                     <i class="footer__item-icon fas fa-chevron-right"></i>
@@ -823,6 +830,8 @@
     <!-- JS Files -->
     <script src="FantaTour/assets/js/countdown.js"></script>
     <script src="FantaTour/assets/js/main.js"></script>
+    <script src="FantaTour/assets/js/script.js"></script>
+
 
 </body>
 </html>

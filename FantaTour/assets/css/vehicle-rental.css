@@ -173,6 +173,9 @@ body {
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  align-items: center;   /* THÊM DÒNG NÀY */
+  justify-content: center;
 }
 
 .modal-content {

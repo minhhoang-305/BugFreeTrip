@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chăm sóc khách hàng - FantaTour</title>
+    <title>Chăm sóc khách hàng - BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -21,9 +21,17 @@
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="stylesheet" href="./assets/css/best-tours.css">
     <link rel="stylesheet" href="assets/css/vehicle-rental.css">
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Font Awesome (nếu dùng biểu tượng) -->
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
 
@@ -33,7 +41,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -42,7 +50,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -94,8 +102,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                               <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -187,7 +195,7 @@
         <div class="best-tours-section">
             <div class="header">
                 <h1>Các Tour Du Lịch Tốt Nhất Ở Việt Nam</h1>
-                <p>Khám phá vẻ đẹp Việt Nam qua những hành trình được thiết kế đẳng cấp bởi FantaTour. Mỗi tour mang đến trải nghiệm độc đáo, từ kỳ quan thiên nhiên đến văn hóa đặc sắc!</p>
+                <p>Khám phá vẻ đẹp Việt Nam qua những hành trình được thiết kế đẳng cấp bởi BugFreeTrip. Mỗi tour mang đến trải nghiệm độc đáo, từ kỳ quan thiên nhiên đến văn hóa đặc sắc!</p>
             </div>
             <div class="tours-list">
                 <div class="tour-item">
@@ -397,9 +405,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="./assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">FantaTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng FantaTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -616,21 +624,74 @@
     }
     </style>
     <script>
-    document.getElementById('confirm-payment-btn').addEventListener('click', () => {
-        // Hiện toast
-        const toast = document.getElementById('success-toast');
-        toast.style.display = 'block';
+    document.getElementById('confirm-payment-btn').addEventListener('click', async () => {
+    const toast = document.getElementById('success-toast');
+    toast.style.display = 'block';
 
-        // Tự ẩn sau 3 giây
-        setTimeout(() => {
-            toast.style.display = 'none';
-            document.getElementById('payment-summary-modal').style.display = 'none';
-        }, 3000);
-    });
+    setTimeout(() => {
+        toast.style.display = 'none';
+        document.getElementById('payment-summary-modal').style.display = 'none';
+    }, 3000);
 
-    function hideToast() {
-        document.getElementById('success-toast').style.display = 'none';
+    // Lấy thông tin tour từ nút bấm và form
+    const activeBtn = window.lastClickedBookButton;
+    const title = activeBtn.dataset.title;
+    const imgSrc = activeBtn.dataset.image;
+    const pricePerGuest = parseInt(activeBtn.dataset.price);
+    const guests = parseInt(document.getElementById('participants').value);
+    const departureDate = document.getElementById('departureDate').value;
+    const total = pricePerGuest * guests;
+
+    // Lấy thông tin người dùng từ form
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    try {
+        // Lấy user hiện tại từ Firebase Auth
+        const user = firebase.auth().currentUser;
+        if (!user) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Lỗi',
+                text: 'Vui lòng đăng nhập để đặt tour!'
+            });
+            return;
+        }
+
+        // Lưu thông tin tour vào Firestore
+        await firebase.firestore().collection('users').doc(user.uid).collection('bookedTours').add({
+    title: title,
+    image: imgSrc,
+    pricePerGuest: pricePerGuest,
+    guests: guests,
+    total: total,
+    departureDate: departureDate,
+    name: name,
+    email: email,
+    phone: phone,
+    bookedAt: firebase.firestore.FieldValue.serverTimestamp()
+});
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Thanh toán thành công!',
+            text: 'Tour đã được thêm vào tài khoản của bạn.',
+            timer: 2000,
+            showConfirmButton: false
+        });
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Lỗi',
+            text: error.message
+        });
     }
+});
+
+function hideToast() {
+    document.getElementById('success-toast').style.display = 'none';
+}
     </script>
 
 
@@ -663,16 +724,16 @@
         });
     </script>
     <script>
-        document.querySelector('.pay-btn').addEventListener('click', function () {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const departureDate = document.getElementById('departureDate').value;
-        const guests = parseInt(document.getElementById('participants').value);
+       document.querySelector('.pay-btn').addEventListener('click', function () {
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const departureDate = document.getElementById('departureDate').value;
+    const guests = parseInt(document.getElementById('participants').value);
 
-        if (!name || !email || !phone) {
-            alert("Vui lòng điền đầy đủ thông tin.");
-        } else {
+    if (!name || !email || !phone) {
+        alert("Vui lòng điền đầy đủ thông tin.");
+    } else {
             // Cập nhật thông tin ngày và số khách
             document.getElementById('payment-departure').textContent = departureDate;
             document.getElementById('payment-guests').textContent = guests + ' khách';
@@ -711,12 +772,12 @@
 
     <script>
         document.querySelectorAll('.book-tour-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                window.lastClickedBookButton = button; // Ghi nhớ nút được bấm
-                const modalId = button.getAttribute('data-modal');
-                document.getElementById(modalId).style.display = 'flex';
-            });
-        });
+    button.addEventListener('click', () => {
+        window.lastClickedBookButton = button;
+        const modalId = button.getAttribute('data-modal');
+        document.getElementById(modalId).style.display = 'flex';
+    });
+});
 
 
         // Đóng modal khi bấm nút close
@@ -754,6 +815,10 @@
         });
     });
     </script>
+
+
+ <script src="./assets/js/main.js"></script>
+<script src="./assets/js/script.js"></script>
 
 </body>
 </html>

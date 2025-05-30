@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thanh Toán Thuê Xe - BugFreeTrip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3f6f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 480px;
+            background: #fff;
+            margin: 40px auto;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, select {
+            margin-top: 5px;
+            padding: 10px 12px;
+            font-size: 1rem;
+            border: 1.5px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus {
+            border-color: #e67e22;
+            outline: none;
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 15px;
+        }
+        .payment-methods label {
+            flex: 1;
+            text-align: center;
+            background: #eee;
+            padding: 12px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .payment-methods input[type="radio"] {
+            display: none;
+        }
+        .payment-methods input[type="radio"]:checked + label {
+            background-color: #e67e22;
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 0 8px rgba(230,126,34,0.6);
+        }
+        .submit-btn {
+            margin-top: 25px;
+            padding: 12px;
+            background-color: #e67e22;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background-color: #d35400;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin: 40px 0 20px 0;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thanh Toán Thuê Xe</h1>
+        <form id="paymentForm">
+            <label for="fullName">Họ và tên</label>
+            <input type="text" id="fullName" name="fullName" placeholder="Nguyễn Văn A" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required />
+
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" id="phone" name="phone" placeholder="0123456789" pattern="[0-9]{10,12}" required />
+
+            <label for="vehicle">Chọn xe thuê</label>
+            <select id="vehicle" name="vehicle" required>
+                <option value="" disabled selected>-- Chọn xe --</option>
+                <option value="Toyota Fortuner">Toyota Fortuner - 1.200.000 VNĐ/ngày</option>
+                <option value="Kia Sedona">Kia Sedona - 1.400.000 VNĐ/ngày</option>
+                <option value="Mitsubishi Xpander">Mitsubishi Xpander - 1.000.000 VNĐ/ngày</option>
+                <option value="Hyundai Solati">Hyundai Solati - 1.800.000 VNĐ/ngày</option>
+                <option value="Toyota HiAce">Toyota HiAce - 1.900.000 VNĐ/ngày</option>
+                <option value="Ford Transit">Ford Transit - 1.800.000 VNĐ/ngày</option>
+                <option value="Thaco County">Thaco County - 2.500.000 VNĐ/ngày</option>
+                <option value="Isuzu Samco">Isuzu Samco - 2.600.000 VNĐ/ngày</option>
+                <option value="Hyundai Universe">Hyundai Universe - 3.000.000 VNĐ/ngày</option>
+                <option value="Thaco Town">Thaco Town - 2.900.000 VNĐ/ngày</option>
+                <option value="Hyundai Aero">Hyundai Aero - 3.500.000 VNĐ/ngày</option>
+                <option value="Thaco Meadow">Thaco Meadow - 3.000.000 VNĐ/ngày</option>
+            </select>
+
+            <label for="rentalStart">Ngày nhận xe</label>
+            <input type="date" id="rentalStart" name="rentalStart" required />
+
+            <label for="rentalEnd">Ngày trả xe</label>
+            <input type="date" id="rentalEnd" name="rentalEnd" required />
+
+            <label>Phương thức thanh toán</label>
+            <div class="payment-methods">
+                <input type="radio" id="payBank" name="paymentMethod" value="Chuyển khoản ngân hàng" required />
+                <label  for="payBank"><i class="fas fa-university"></i><br>
+                    
+                    <a href="Chuyenkhoan.html">Chuyển Khoản</a>
+        
+                    </label>
+
+                <input type="radio" id="payCOD" name="paymentMethod" value="Thanh toán khi nhận xe" />
+                <label for="payCOD"><i class="fas fa-truck"></i><br>Thanh toán khi nhận xe</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Thanh Toán</button>
+        </form>
+        <p class="note">* Sau khi thanh toán, chúng tôi sẽ liên hệ lại với bạn để hoàn tất thủ tục thuê xe.</p>
+    </div>
+
+    <footer>© 2025 BugFreeTrip - Mọi quyền được bảo lưu</footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fullName = this.fullName.value.trim();
+            const email = this.email.value.trim();
+            const phone = this.phone.value.trim();
+            const vehicle = this.vehicle.value;
+            const rentalStart = new Date(this.rentalStart.value);
+            const rentalEnd = new Date(this.rentalEnd.value);
+            const paymentMethod = this.paymentMethod.value;
+
+            if (rentalEnd < rentalStart) {
+                alert('Ngày trả xe phải lớn hơn hoặc bằng ngày nhận xe!');
+                return;
+            }
+
+            const timeDiff = rentalEnd - rentalStart;
+            const oneDay = 24 * 60 * 60 * 1000;
+            const rentalDays = Math.round(timeDiff / oneDay) + 1;
+
+            const priceMap = {
+                "Toyota Fortuner": 1200000,
+                "Kia Sedona": 1400000,
+                "Mitsubishi Xpander": 1000000,
+                "Hyundai Solati": 1800000,
+                "Toyota HiAce": 1900000,
+                "Ford Transit": 1800000,
+                "Thaco County": 2500000,
+                "Isuzu Samco": 2600000,
+                "Hyundai Universe": 3000000,
+                "Thaco Town": 2900000,
+                "Hyundai Aero": 3500000,
+                "Thaco Meadow": 3000000
+            };
+
+            const totalPrice = priceMap[vehicle] * rentalDays;
+
+            alert(
+                'Cảm ơn ' + fullName + '!\n' +
+                'Bạn đã chọn thuê xe: ' + vehicle + '\n' +
+                'Ngày nhận xe: ' + rentalStart.toLocaleDateString('vi-VN') + '\n' +
+                'Ngày trả xe: ' + rentalEnd.toLocaleDateString('vi-VN') + '\n' +
+                'Số ngày thuê: ' + rentalDays + '\n' +
+                'Tổng số tiền: ' + totalPrice.toLocaleString('vi-VN') + ' VNĐ\n' +
+                'Phương thức thanh toán: ' + paymentMethod + '\n\n' +
+                'Chúng tôi sẽ liên hệ lại với bạn sớm nhất để xác nhận đơn hàng.'
+            );
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
+

@@ -1,75 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login/registration</title>
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="assets/css/login.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login/Registration</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="./assets/css/login.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+    <style>
+        .swal2-icon.swal2-error {
+            border-color: #f27474;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark-line-left,
+        .swal2-icon.swal2-error .swal2-x-mark-line-right {
+            position: absolute;
+            top: -40px;
+            width: 2px;
+            height: 30px;
+            background-color: #f27474;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark-line-left {
+            transform: rotate(45deg) translate(-50%, -50%);
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark-line-right {
+            transform: rotate(-45deg) translate(-50%, -50%);
+        }
+    </style>
 </head>
+
 <body>
     <div class="container" id="container">
         <div class="form-container register-container">
-            <form action="#">
-                <h1>Register hire.</h1>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button>Resgister</button>
+            <form>
+                <h1>Register here.</h1>
+                <input type="text" placeholder="Name" id="registerName" />
+                <input type="email" placeholder="Email" id="registerEmail" />
+                <input type="password" placeholder="Password" id="registerPassword" />
+                <button id="n">Register</button>
                 <span>or use your account</span>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                    <a href="#" class="social"><i class="lni lni-google"></i></a>
-                    <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
-
+                    <a href="#" class="social" id="facebook-register"><i class="lni lni-facebook-fill"></i></a>
+                    <a href="#" class="social" id="google-register"><i class="lni lni-google"></i></a>
+                    <a href="#" class="social" id="linkedin-register"><i class="lni lni-linkedin-original"></i></a>
                 </div>
-
             </form>
         </div>
+
         <div class="form-container login-container">
-            <form action="#">
-                <h1>Login hire.</h1>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+            <form>
+                <h1>Login here.</h1>
+                <input type="email" placeholder="Email" id="loginEmail" />
+                <input type="password" placeholder="Password" id="loginPassword" />
                 <div class="content">
-                <div class="checkbox">
-                    <input type="checkbox" name="checkbox" id="checkbox">
-                    <label>Remember me</label>
+                    <div class="checkbox">
+                        <input type="checkbox" name="checkbox" id="checkbox" />
+                        <label>Remember me</label>
+                    </div>
                 </div>
-                <div class="pass-link">
-                    <a href="#">Forgot password?</a>
-                </div>
-            </div>
-                <button>Login</button>
+                <button id="m">Login</button>
+                <p style="margin-top: 10px; cursor: pointer; color: blue;" onclick="forgotPassword()">Quên mật khẩu?</p>
                 <span>or use your account</span>
                 <div class="social-container">
-                    <a href="#" class="social"><i class="lni lni-facebook-fill"></i></a>
-                    <a href="#" class="social"><i class="lni lni-google"></i></a>
-                    <a href="#" class="social"><i class="lni lni-linkedin-original"></i></a>
+                    <a href="#" class="social" id="facebook-login"><i class="lni lni-facebook-fill"></i></a>
+                    <a href="google-login" class="social" id="google-login"><i class="lni lni-google"></i></a>
+                    <a href="#" class="social" id="linkedin-login"><i class="lni lni-linkedin-original"></i></a>
                 </div>
             </form>
         </div>
+
         <div class="overlay-container">
             <div class="overlay">
                 <div class="overlay-panel overlay-left">
-                    <h1 class="title">Hello<br>friends</h1>
+                    <h1 class="title">Hello<br />friends</h1>
                     <p>if you have an account, login here and have fun</p>
-                    <button class="ghost" id="login">Login
-                      <i class="lni lni-arrow-left login"></i>
-
-                    </button>
+                    <button class="ghost" id="login">Login <i class="lni lni-arrow-left login"></i></button>
                 </div>
                 <div class="overlay-panel overlay-right">
-                    <h1 class="title">Start you <br>journy now</h1>
-                    <p>if you don't have an account yet, join us and start your jouney.</p>
-                    <button class="ghost" id="register">Register
-                    <i class="lni lni-arrow-right register"></i>
-
-                    </button>
+                    <h1 class="title">Start your<br />journey now</h1>
+                    <p>if you don't have an account yet, join us and start your journey.</p>
+                    <button class="ghost" id="register">Register <i class="lni lni-arrow-right register"></i></button>
                 </div>
             </div>
         </div>
     </div>
-    <script src = "assets/js/script.js"></script>
+    <!-- <script>
+        // Cấu hình Firebase (thay bằng của bạn)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAfS9qjdI-zZ5a8z9IlfuA83ilukZrDcFY",
+            authDomain: "nhi06-c8375.firebaseapp.com",
+            projectId: "nhi06-c8375",
+            storageBucket: "nhi06-c8375.appspot.com",
+            messagingSenderId: "620088727553",
+            appId: "1:620088727553:web:36d5768da11677bf338800"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Hiệu ứng chuyển form
+        const registerButton = document.getElementById("register");
+        const loginButton = document.getElementById("login");
+        const container = document.getElementById("container");
+
+        registerButton.addEventListener("click", () => {
+            container.classList.add("right-panel-active");
+        });
+
+        loginButton.addEventListener("click", () => {
+            container.classList.remove("right-panel-active");
+        });
+
+        // Xử lý đăng ký (Firebase)
+        const nButton = document.getElementById("n");
+        nButton.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const name = document.querySelector(".register-container input[type='text']").value;
+            const email = document.querySelector(".register-container input[type='email']").value;
+            const password = document.querySelector(".register-container input[type='password']").value;
+
+            if (!name || !email || !password) {
+                Swal.fire({ icon: 'warning', title: 'Please fill in all fields!' });
+                return;
+            }
+
+            try {
+                const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                await userCredential.user.updateProfile({ displayName: name });
+
+                await db.collection("users").doc(userCredential.user.uid).set({
+                    name: name,
+                    email: email,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    userType: 0 // 0 = user, 1 = admin (tuỳ bạn gán role)
+                });
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng ký thành công!',
+                    text: 'Bạn có thể đăng nhập ngay.',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    container.classList.remove("right-panel-active");
+                });
+            } catch (error) {
+                Swal.fire({ icon: 'error', title: 'Lỗi đăng ký', text: error.message });
+            }
+        });
+
+        // Xử lý đăng nhập (Firebase)
+        const mButton = document.getElementById("m");
+        mButton.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const email = document.querySelector(".login-container input[type='email']").value;
+            const password = document.querySelector(".login-container input[type='password']").value;
+
+            try {
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                const user = userCredential.user;
+                const doc = await db.collection("users").doc(user.uid).get();
+                const data = doc.data();
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Đăng nhập thành công!',
+                    text: 'Đang chuyển hướng...',
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = "/DACS-FantaTour-main/FantaTour/../index.html";
+                });
+            } catch (error) {
+                Swal.fire({ icon: 'error', title: 'Đăng nhập thất bại!', text: error.message });
+            }
+        });
+
+        // Quên mật khẩu
+        function forgotPassword() {
+            Swal.fire({
+                title: "Quên mật khẩu?",
+                input: "email",
+                inputLabel: "Nhập email của bạn",
+                inputPlaceholder: "you@example.com",
+                showCancelButton: true,
+                confirmButtonText: "Gửi link khôi phục"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    auth.sendPasswordResetEmail(result.value)
+                        .then(() => {
+                            Swal.fire({ icon: "success", title: "Đã gửi email", text: "Hãy kiểm tra hộp thư." });
+                        })
+                        .catch((error) => {
+                            Swal.fire({ icon: "error", title: "Lỗi", text: error.message });
+                        });
+                }
+            });
+        }
+
+        // Hiển thị thông tin tài khoản nếu đã đăng nhập
+        function kiemtradangnhap() {
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    const doc = await db.collection("users").doc(user.uid).get();
+                    const data = doc.data();
+                    document.querySelector('.auth-container').innerHTML = `
+          <a href="javascript:;" class="navbar__item-link">
+            <span class="text-dndk">Tài khoản</span>
+            <span class="text-tk">${user.displayName || data.name} <i class="fa-solid fa-caret-down"></i></span>
+          </a>
+          <ul class="navbar__subnav">
+            <li class="subnav__item"><a href="javascript:;" onclick="myAccount()">Tài khoản của tôi</a></li>
+            <li class="subnav__item"><a href="javascript:;" id="logout">Đăng xuất</a></li>
+          </ul>
+        `;
+                    document.getElementById('logout').addEventListener('click', logOut);
+
+                    if (data.userType == 1) {
+                        let node = document.createElement(`li`);
+                        node.innerHTML = `<a href="./admin.html"><i class="fa-light fa-gear"></i> Quản lý cửa hàng</a>`;
+                        document.querySelector('.header-middle-right-menu')?.prepend(node);
+                    }
+                }
+            });
+        }
+
+        function logOut() {
+            auth.signOut().then(() => {
+                window.location.reload();
+            });
+        }
+
+        function myAccount() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('trangchu')?.classList.add('hide');
+            document.getElementById('account-user')?.classList.add('open');
+            userInfo();
+        }
+
+        function userInfo() {
+            // Placeholder nếu bạn muốn hiển thị chi tiết tài khoản người dùng
+        }
+
+        window.onload = function () {
+            kiemtradangnhap();
+        };
+    </script> -->
+
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

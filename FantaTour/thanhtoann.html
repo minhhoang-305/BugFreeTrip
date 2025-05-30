@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chăm sóc khách hàng - BugFreeTrip</title>
+    <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Font Awesome -->
+<!-- Cung cấp icon miễn phí như Facebook, Insta, điện thoại,... -->
+<!-- <i class="fas fa-phone"></i> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+
+<!-- CSS Files -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/best-tours.css">
+    <link rel="stylesheet" href="assets/css/vehicle-rental.css">
+</head>
+<style>
+</style>
+<body>
+        <div class="modal-content">
+            <div class="progress-container">
+                <div class="step completed">
+                    <div class="circle"><i class="fas fa-check"></i></div>
+                    <p>Chọn tour</p>
+                </div>
+                <div class="progress-line"></div>
+                <div class="step completed">
+                    <div class="circle"><i class="fas fa-check"></i></div>
+                    <p>Điền thông tin</p>
+                </div>
+                <div class="progress-line"></div>
+                <div class="step current">
+                    <div class="circle"></div>
+                    <p>Thanh toán</p>
+                </div>
+            </div>    
+            <div style="display: flex; gap: 16px;">
+                <img src="./assets/img/HaLong.jpg" alt="Tour" style="width: 100px; height: 100px; border-radius: 8px; object-fit: cover;">
+                <div>
+                    <h3 style="margin: 0;line-height: 30px">Tour Vịnh Hạ Long-Kỳ Quan Thiên Nhiên </h3><br>
+                    <p><strong>Thời gian:</strong> 3 ngày 2 đêm</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <p><strong>Mã tour:</strong> TODANHOAMTR3N2D-XEQK-104277</p>
+                <p><strong>Ngày khởi hành:</strong> <span id="payment-departure">15/05/2025</span></p>
+                <p><strong>Số khách:</strong> <span id="payment-guests">1 khách</span></p>
+                <p><strong>Giá 1 khách:</strong> <span id="payment-price">2.500.000 VNĐ</span></p>
+            </div>
+
+            <div style="margin-top: 20px; font-size: 18px;">
+                <p><strong>Tổng tiền:</strong> <span id="payment-total" style="color: orange;">2,500,000 VND</span></p>
+            </div>
+
+            <button id="confirm-payment-btn" style="margin-top: 25px; padding: 12px 24px; background-color: #00C4B4; color: white; font-size: 16px; border: none; border-radius: 25px; cursor: pointer;width: 100%;">
+            Thanh toán
+            </button>
+        </div>
+    
+    <div id="success-toast" style="
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: #fff;
+        padding: 16px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        display: none;
+        z-index: 9999;
+        min-width: 350px;
+        border-left: 5px solid #28a745;
+        animation: slideIn 0.3s ease-out;
+    ">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-check-circle" style="color: #28a745; font-size: 20px;"></i>
+                <div>
+                    <strong>Thành công</strong>
+                    <div style="font-size: 14px; color: #555;">Thanh toán thành công!</div>
+                </div>
+            </div>
+            <span onclick="hideToast()" style="cursor: pointer; font-size: 18px; color: #999;">&times;</span>
+        </div>
+    </div>
+    <style>
+    @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+    }
+    </style>
+    <script>
+    document.getElementById('confirm-payment-btn').addEventListener('click', () => {
+        // Hiện toast
+        const toast = document.getElementById('success-toast');
+        toast.style.display = 'block';
+
+        // Tự ẩn sau 3 giây
+        setTimeout(() => {
+            toast.style.display = 'none';
+            document.getElementById('payment-summary-modal').style.display = 'none';
+        }, 3000);
+    });
+
+    function hideToast() {
+        document.getElementById('success-toast').style.display = 'none';
+    }
+    </script>
+    <script>
+        // Lấy thông tin từ localStorage
+const name = localStorage.getItem('name');
+const email = localStorage.getItem('email');
+const phone = localStorage.getItem('phone');
+const departureDate = localStorage.getItem('departureDate');
+const guests = localStorage.getItem('guests');
+const total = localStorage.getItem('total');
+
+// Cập nhật thông tin vào khung thanh toán
+document.getElementById('payment-departure').textContent = departureDate;
+document.getElementById('payment-guests').textContent = guests + ' khách';
+document.getElementById('payment-price').textContent = formatCurrency(pricePerGuest) + ' VNĐ';
+document.getElementById('payment-total').textContent = formatCurrency(total) + ' VNĐ';
+
+// Hàm định dạng tiền tệ
+function formatCurrency(number) {
+    return number.toLocaleString('vi-VN');
+}
+    </script>
+    <script src="assets/js/payment.js"></script>
+</body>
+</html>

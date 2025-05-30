@@ -188,7 +188,7 @@
        
         <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ABCTour</title>
+    <title>BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
     <!-- Google Fonts -->
@@ -201,11 +201,18 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/main.css">
-   
+   <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- Font Awesome (nếu dùng biểu tượng) -->
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
     
 
     </head>
-<body>
+<body onload="kiemtradangnhap();">
      <main class="wrapper">
         <header class="header">
             <!-- Navigation Bar -->
@@ -214,7 +221,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -223,7 +230,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -270,8 +277,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                                <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -368,13 +375,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="category-box-promotion-inner">
-                            <h2>Tour Miền Trung khuyến mãi</h2>
+                           
                             <div class="category-box-slider-promotion category-tour-box-slider-promotion">
                                 <div id="category-owl-slider-promotion" class="owl-carousel category-owl-slider-promotion">
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-du-lich-3n2d-da-nang-ba-na-ngu-hanh-son-hoi-an.html">
-                                                <img alt="Tour Đà Nẵng &#8211; Bà Nà Hills- Ngũ Hành Sơn &#8211; Hội An 3N2Đ" src="https://www.vietnambooking.com/wp-content/uploads/2019/10/tour-du-lich-3n2d-da-nang-ba-na-ngu-hanh-son-hoi-an-1-1-300x194.jpg"/>
+                                            <a href="DN-HA.html">
+                                                <img alt="Tour Đà Nẵng &#8211; Hội An 4N3Đ" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
@@ -385,7 +392,7 @@
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-du-lich-3n2d-da-nang-ba-na-ngu-hanh-son-hoi-an.html">Tour Đà Nẵng &#8211;Bà Nà Hills- Ngũ Hành Sơn &#8211;Hội An 3N2Đ</a>
+                                                    <a href="DN-HA.html">Tour Đà Nẵng-Hội An 4N3Đ</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -393,10 +400,10 @@
                                                     <tr>
                                                         <td>
                                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                            3 ngày 2 đêm 
+                                                            4 ngày 3 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -411,10 +418,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    2,490,000 <sup>đ</sup>
+                                                    5,490,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    3,113,000 <sup>đ</sup>
+                                                    8,200,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -425,19 +432,19 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-da-nang-hoi-an-ba-na-hills-nui-than-tai-4n3d.html">
-                                                <img alt="Tour Đà Nẵng &#8211; Hội An &#8211; Bà Nà &#8211; Núi Thần Tài 4 Ngày 3 Đêm: Khám Phá Vẻ Đẹp Miền Trung" src="https://www.vietnambooking.com/wp-content/uploads/2023/01/tour-da-nang-hoi-an-ba-na-hills-nui-than-tai-4n3d-1-300x194.jpg"/>
+                                            <a href="PK-KT-MD.html">
+                                                <img alt="Tour Pleiku &#8211;KonTum &#8211; Măng Đen 3 Ngày 2 Đêm: Khám Phá Vẻ Đẹp Miền Trung" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Đà Nẵng, Hội An, Miền Trung                                
+                                            Pleike,KonTum,Măng Đen,Miền Trung                               
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-da-nang-hoi-an-ba-na-hills-nui-than-tai-4n3d.html">Tour Đà Nẵng &#8211;Hội An &#8211;Bà Nà &#8211;Núi Thần Tài 4 Ngày 3 Đêm: Khám Phá Vẻ Đẹp Miền Trung</a>
+                                                    <a href="PK-KT-MD.html">Tour Pleiku &#8211;KonTum &#8211;Măng Đen 3 Ngày 2 Đêm: Khám Phá Vẻ Đẹp Miền Trung</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -445,10 +452,10 @@
                                                     <tr>
                                                         <td>
                                                             <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                            4 ngày 3 đêm 
+                                                            3 ngày 2 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -463,10 +470,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    3,090,000 <sup>đ</sup>
+                                                    3,690,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    3,865,000 <sup>đ</sup>
+                                                    4,800,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -477,19 +484,19 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-mua-he-da-nang-3-ngay-2-dem.html">
-                                                <img alt="Tour du lịch Đà Nẵng mùa hè 3 ngày 2 đêm | Bà Nà Hills &#8211; Cù Lao Chàm &#8211; Núi Thần Tài" src="https://www.vietnambooking.com/wp-content/uploads/2018/06/tour-mua-he-da-nang-3-ngay-2-dem-300x200.png"/>
+                                            <a href="PL-MC.html">
+                                                <img alt="Tour Pù Luông - Mộc Châu 3 Ngày 2 Đêm: Bản Lác - Đồi Chè Trái Tim" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Đà Nẵng, Hội An, Miền Trung                                
+                                            Pù Luông,Mộc Châu,Miền Trung                               
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-mua-he-da-nang-3-ngay-2-dem.html">Tour du lịch Đà Nẵng mùa hè 3 ngày 2 đêm | Bà Nà Hills &#8211;Cù Lao Chàm &#8211;Núi Thần Tài</a>
+                                                    <a href="PL-MC.html">Tour Pù Luông - Mộc Châu 3 Ngày 2 Đêm: Bản Lác - Đồi Chè Trái Tim</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -500,8 +507,8 @@
                                                             3 ngày 2 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/tau_thuy.webp" alt="tau_thuy"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
+                                                           
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -516,10 +523,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    3,890,000 <sup>đ</sup>
+                                                    3,490,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    4,865,000 <sup>đ</sup>
+                                                    5,500,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -530,20 +537,19 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-da-nang-hoi-an-4-ngay-3-dem.html">
-                                                <img alt="Tour Đà Nẵng &#8211; Hội An 4 Ngày 3 Đêm: Trải Nghiệm Văn Hóa Cảnh Đẹp" src="https://www.vietnambooking.com/wp-content/uploads/2023/01/tour-da-nang-hoi-an-4-ngay-4-dem-3-300x194.jpg"/>
-                                                <div class="note-special">Thuyền thúng Rừng Dừa</div>
+                                            <a href="Hue.html">
+                                                <img alt="Tour Huế 4 Ngày 3 Đêm: Huế – Đà Nẵng" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Đà Nẵng, Hội An, Miền Trung                                
+                                            Huế,Miền Trung,Việt Nam                                
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-da-nang-hoi-an-4-ngay-3-dem.html">Tour Đà Nẵng &#8211;Hội An 4 Ngày 3 Đêm: Trải Nghiệm Văn Hóa Cảnh Đẹp</a>
+                                                    <a href="Hue.html">Tour Huế 4 Ngày 3 Đêm: Huế – Đà Nẵng</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -554,13 +560,13 @@
                                                             4 ngày 3 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <div class="box-place-tour">
                                                     <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                                    Đà Nẵng                                        
+                                                    Huế                                       
                                                 </div>
                                                 <div class="box-start-tour">
                                                     <i class="fa fa-calendar-alt" aria-hidden="true"></i>
@@ -569,10 +575,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    2,790,000 <sup>đ</sup>
+                                                    10,500,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    3,490,000 <sup>đ</sup>
+                                                    13,150,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -583,20 +589,19 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-quy-nhon-phu-yen-4-ngay-3-dem.html">
-                                                <img alt="Tour Quy Nhơn &#8211; Phú Yên 4 Ngày 3 Đêm: Điểm Đến Lý Tưởng Cho Kỳ Nghỉ Hấp Dẫn" src="https://www.vietnambooking.com/wp-content/uploads/2022/09/tour-quy-nhon-phu-yen-4-ngay-3-dem-2024-300x194.jpg"/>
-                                                <div class="note-special">Tặng vé xem xiếc hải cẩu</div>
+                                            <a href="NgheAn.html">
+                                                <img alt="Tour Nghệ An 4 Ngày 3 Đêm: Vinh – Cửa Lò – Quê Bác" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Miền Trung, Phú Yên, Quy Nhơn                                
+                                            Nghệ An,Miền Trung,Việt Nam                              
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-quy-nhon-phu-yen-4-ngay-3-dem.html">Tour Quy Nhơn &#8211;Phú Yên 4 Ngày 3 Đêm: Điểm Đến Lý Tưởng Cho Kỳ Nghỉ Hấp Dẫn</a>
+                                                    <a href="NgheAn.html">Tour Nghệ An 4 Ngày 3 Đêm: Vinh – Cửa Lò – Quê Bác</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -607,13 +612,13 @@
                                                             4 ngày 3 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <div class="box-place-tour">
                                                     <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                                    Qui Nhơn                                        
+                                                    Nghệ An                                        
                                                 </div>
                                                 <div class="box-start-tour">
                                                     <i class="fa fa-calendar-alt" aria-hidden="true"></i>
@@ -622,10 +627,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    4,350,000 <sup>đ</sup>
+                                                    3,090,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    5,750,000 <sup>đ</sup>
+                                                    7,600,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -636,19 +641,19 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/du-lich-da-nang-ba-na-cu-lao-cham-hoi-an-4n3d-hang-tuan.html">
-                                                <img alt="Tour Đà Nẵng &#8211; Cù Lao Chàm &#8211; Bà Nà Hills 4N3Đ dịp hè | Du ngoạn Sơn Trà &#038; Dạo phố Hội An" src="https://www.vietnambooking.com/wp-content/uploads/2018/04/tour-du-lich-da-nang-hoi-an-4-ngay-3-dem-8-300x194.jpg"/>
+                                            <a href="NhaTrang.html">
+                                                <img alt="Tour Nha Trang 4 Ngày 3 Đêm: Nha Trang – Vinpearl – Dốc Lết" src="assets/img/anh chung.webp"/>
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Đà Nẵng, Hội An, Miền Trung                                
+                                            Nha Trang,Miền Trung,Việt Nam                                
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/du-lich-da-nang-ba-na-cu-lao-cham-hoi-an-4n3d-hang-tuan.html">Tour Đà Nẵng &#8211;Cù Lao Chàm &#8211;Bà Nà Hills 4N3Đ dịp hè | Du ngoạn Sơn Trà &#038;Dạo phố Hội An</a>
+                                                    <a href="NhaTrang.html">Tour Nha Trang 4 Ngày 3 Đêm: Nha Trang – Vinpearl – Dốc Lết</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -659,9 +664,8 @@
                                                             4 ngày 3 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/tau_thuy.webp" alt="tau_thuy"/>
-                                                        </td>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
+                                                           
                                                     </tr>
                                                 </table>
                                                 <div class="box-place-tour">
@@ -675,10 +679,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    3,190,000 <sup>đ</sup>
+                                                    3,490,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    3,990,000 <sup>đ</sup>
+                                                    8,000,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -689,20 +693,20 @@
                                     </div>
                                     <div class="item">
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-dao-phu-quy-3-ngay-2-dem.html">
-                                                <img alt="Tour Đảo Phú Quý 3 Ngày 2 Đêm: Thiên đường biển đảo hoang vắng Bình Thuận" src="https://www.vietnambooking.com/wp-content/uploads/2022/07/tour-dao-phu-quy-3-ngay-2-dem-3-300x194.jpg"/>
-                                                <div class="note-special">Tour Biển Đảo HOT</div>
+                                            <a href="PuLuong.html">
+                                                <img alt="Tour Pù Luông 3 Ngày 2 Đêm: Pù Luông – Bản Kho Mường – Suối Cá Thần" src="assets/img/anh chung.webp"/>
+                                              
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
                                         <div class="box-country">
                                             <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Miền Trung, Phan Thiết                                
+                                           Pù Luồng,Miền Trung,Việt Nam                               
                                         </div>
                                         <div class="box-content-promotion box-content-promotion-tour">
                                             <div class="box-title-content">
                                                 <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-dao-phu-quy-3-ngay-2-dem.html">Tour Đảo Phú Quý 3 Ngày 2 Đêm: Thiên đường biển đảo hoang vắng Bình Thuận</a>
+                                                    <a href="PuLuong.html">Tour Pù Luông 3 Ngày 2 Đêm: Pù Luông – Bản Kho Mường – Suối Cá Thần</a>
                                                 </h3>
                                             </div>
                                             <div class="box-summary-content-tour">
@@ -713,14 +717,14 @@
                                                             3 ngày 2 đêm 
                                                         </td>
                                                         <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/tau_thuy.webp" alt="tau_thuy"/>
+                                                            <img src="assets/img/cariconmini.jpg" alt="o_to"/>
+                                                           
                                                         </td>
                                                     </tr>
                                                 </table>
                                                 <div class="box-place-tour">
                                                     <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                                    Hồ Chí Minh                                        
+                                                   Đà Nẵng                                       
                                                 </div>
                                                 <div class="box-start-tour">
                                                     <i class="fa fa-calendar-alt" aria-hidden="true"></i>
@@ -729,10 +733,10 @@
                                             </div>
                                             <div class="box-price-promotion-tour">
                                                 <span>
-                                                    3,490,000 <sup>đ</sup>
+                                                    2,990,000 <sup>đ</sup>
                                                 </span>
                                                 <del>
-                                                    4,958,000 <sup>đ</sup>
+                                                    6,500,000 <sup>đ</sup>
                                                 </del>
                                                 <div class="box-percent-tour">
                                                     <div class="arrow-left"></div>
@@ -741,112 +745,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-da-lat-5-ngay-4-dem.html">
-                                                <img alt="Tour Đà Lạt 5 Ngày 4 Đêm: Tìm chút bình yên nơi phố núi mơ mộng" src="https://www.vietnambooking.com/wp-content/uploads/2020/07/tour-da-lat-5-ngay-4-dem-300x194.jpg"/>
-                                                <div class="note-special">Khách sạn 4 sao</div>
-                                                <button>Đặt tour</button>
-                                            </a>
-                                        </div>
-                                        <div class="box-country">
-                                            <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Đà Lạt, Miền Trung, Nha Trang                                
-                                        </div>
-                                        <div class="box-content-promotion box-content-promotion-tour">
-                                            <div class="box-title-content">
-                                                <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-da-lat-5-ngay-4-dem.html">Tour Đà Lạt 5 Ngày 4 Đêm: Tìm chút bình yên nơi phố núi mơ mộng</a>
-                                                </h3>
-                                            </div>
-                                            <div class="box-summary-content-tour">
-                                                <table class="table tlb-time-and-traffic-tour">
-                                                    <tr>
-                                                        <td>
-                                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                            5 ngày 4 đêm 
-                                                        </td>
-                                                        <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="box-place-tour">
-                                                    <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                                    Hồ Chí Minh                                        
-                                                </div>
-                                                <div class="box-start-tour">
-                                                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                                                    KH: Hàng ngày                                        
-                                                </div>
-                                            </div>
-                                            <div class="box-price-promotion-tour">
-                                                <span>
-                                                    4,529,000 <sup>đ</sup>
-                                                </span>
-                                                <del>
-                                                    5,508,000 <sup>đ</sup>
-                                                </del>
-                                                <div class="box-percent-tour">
-                                                    <div class="arrow-left"></div>
-                                                    -18%
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/tour-ta-dung-1-ngay.html">
-                                                <img alt="Tour Tà Đùng 1 ngày: Khám phá tuyệt tác Tây Nguyên đại ngàn" src="https://www.vietnambooking.com/wp-content/uploads/2020/03/tour-ta-dung-6-300x195.jpg"/>
-                                                <div class="note-special">Giá siêu ưu đãi</div>
-                                                <button>Đặt tour</button>
-                                            </a>
-                                        </div>
-                                        <div class="box-country">
-                                            <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                            Buôn Mê Thuột, Miền Trung                                
-                                        </div>
-                                        <div class="box-content-promotion box-content-promotion-tour">
-                                            <div class="box-title-content">
-                                                <h3 class="title-h3">
-                                                    <a href="https://www.vietnambooking.com/du-lich/tour-ta-dung-1-ngay.html">Tour Tà Đùng 1 ngày: Khám phá tuyệt tác Tây Nguyên đại ngàn</a>
-                                                </h3>
-                                            </div>
-                                            <div class="box-summary-content-tour">
-                                                <table class="table tlb-time-and-traffic-tour">
-                                                    <tr>
-                                                        <td>
-                                                            <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                            1 ngày 
-                                                        </td>
-                                                        <td>
-                                                            <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <div class="box-place-tour">
-                                                    <i class="fa fa-map-marker-alt" aria-hidden="true"></i>
-                                                    Hồ Chí Minh                                        
-                                                </div>
-                                                <div class="box-start-tour">
-                                                    <i class="fa fa-calendar-alt" aria-hidden="true"></i>
-                                                    KH: Hàng tuần, lễ 30/4                                        
-                                                </div>
-                                            </div>
-                                            <div class="box-price-promotion-tour">
-                                                <span>
-                                                    1,190,000 <sup>đ</sup>
-                                                </span>
-                                                <del>
-                                                    1,666,000 <sup>đ</sup>
-                                                </del>
-                                                <div class="box-percent-tour">
-                                                    <div class="arrow-left"></div>
-                                                    -29%
-                                                </div>
-                                               
-                                                 </div>
-                                            </div>
+                                    
+                                    
+                                        
+                                                
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -868,9 +771,9 @@
                                     <li>
                                        
                                         <div class="box-img">
-                                            <a href="https://www.vietnambooking.com/du-lich/kham-pha-mien-trung-3n2d-da-nang-hoi-an-cu-lao-cham-ba-na.html">
-                                                <img alt="Tour tết Đà Nẵng &#8211; Cù Lao Chàm &#8211; Hội An &#8211; Bà Nà 3N2Đ dịp hè | Hành trình khám phá miền Trung" src="https://www.vietnambooking.com/wp-content/uploads/2018/01/tour-du-lich-mien-trung-3n2d-8-300x194.jpg"/>
-                                                <div class="note-special">Tặng vé Snorkeling Lặn ngắm San hô</div>
+                                            <a href="TayNguyen.html">
+                                                <img alt="Tour Tây Nguyên 4 Ngày 3 Đêm : Buôn Ma Thuột – Đà Lạt" src="assets/img/anh chung.webp"/>
+                                              
                                                 <button>Đặt tour</button>
                                             </a>
                                         </div>
@@ -878,24 +781,24 @@
                                             <div class="box-content-promotion box-content-promotion-tour">
                                                 <div class="box-title-content">
                                                     <h3 class="title-h3">
-                                                        <a href="https://www.vietnambooking.com/du-lich/kham-pha-mien-trung-3n2d-da-nang-hoi-an-cu-lao-cham-ba-na.html">Tour tết Đà Nẵng &#8211;Cù Lao Chàm &#8211;Hội An &#8211;Bà Nà 3N2Đ dịp hè | Hành trình khám phá miền Trung</a>
+                                                        <a href="TayNguyen.html">Tour Tây Nguyên 4 Ngày 3 Đêm : Buôn Ma Thuột – Đà Lạt</a>
                                                     </h3>
                                                 </div>
                                                 <div class="box-summary-content-tour">
                                                     <table class="table tlb-time-and-traffic-tour">
                                                         <tr>
-                                                            <td>Mã: TODANHOAMTR3N2D-TTTLHE-94711 </td>
+                                                            <td>Mã: ABCTN4D3N-XEVE-151693 </td>
                                                             <td>
                                                                 <i class="fa fa-clock-o" aria-hidden="true"></i>
-                                                                3 ngày 2 đêm 
+                                                                4 ngày 2 đêm 
                                                             </td>
                                                             <td>
-                                                                <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/o_to.webp" alt="o_to"/>
-                                                                <img src="https://www.vietnambooking.com/wp-content/themes/vietnambooking_master/images/index/tour/icon_traffic/tau_thuy.webp" alt="tau_thuy"/>
+                                                                <img src="assets/img/cariconmini.jpg" alt="o_to"/>
+                                                               
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td colspan="3">Khởi Hành : Đà Nẵng, Hàng ngày</td>
+                                                            <td colspan="3">Khởi Hành : Thành Phố Hồ Chí Minh,Thứ 6 Hằng Tuần</td>
                                                         </tr>
                                                     </table>
                                                     <div class="box-tour-note-extra">
@@ -909,14 +812,14 @@
                                                         2,890,000 <sup>đ</sup>
                                                     </span>
                                                     <del>
-                                                        3,613,000 <sup>đ</sup>
+                                                        7,580,000 <sup>đ</sup>
                                                     </del>
                                                     <div class="box-percent-tour">
                                                         <div class="arrow-left"></div>
                                                         -20%
                                                     </div>
                                                 </div>
-                                                <a class="btn btn-success btn-xs btn-readmore" href="https://www.vietnambooking.com/du-lich/kham-pha-mien-trung-3n2d-da-nang-hoi-an-cu-lao-cham-ba-na.html">
+                                                <a class="btn btn-success btn-xs btn-readmore" href="TayNguyen.html">
                                                     Chi tiết <span class="glyphicon glyphicon-chevron-right"></span>
                                                 </a>
                                             </div>
@@ -933,71 +836,77 @@
                             <div class="single-box-content-inner">
                                 <div class="single-content">
                                     <h2 style="text-align: center;">
-                                        <strong>Tour du lịch Miền Trung gi &aacute;rẻ - Thi &ecirc;n đường d &agrave;nh cho những ai m &ecirc;x &ecirc;dịch</strong>
+                                        <strong>Tour du lịch Miền Trung giá rẻ - Thiên đường dành cho những ai mê du lịch</strong>
                                     </h2>
                                     <p style="text-align: justify;">
                                         <meta charset="utf-8"/>
-                                        <a href="https://www.vietnambooking.com/du-lich/tour-du-lich/du-lich-mien-trung.html" rel="noopener" target="_blank">
+                                        <a href="MienTrung.html" rel="noopener" target="_blank">
                                             <strong>Tour du lịch miền Trung</strong>
                                         </a>
-                                        c &oacute;sức hấp dẫn đặc biệt khiến bất kỳ ai cũng muốn đặt ch &acirc;n một lần trong đời. Miền Trung hội tụ mọi vẻ đẹp của đất trời với &aacute;nh nắng sớm mai ấm &aacute;p, biển xanh c &aacute;t trắng v &agrave;cả rừng n &uacute;i hoang sơ, kỳ b &iacute;. Du lịch miền Trung c &ograve;n thu h &uacute;t đ &ocirc;ng đảo du kh &aacute;ch bởi sự kết hợp h &agrave;i h &ograve;a giữa cảnh sắc thi &ecirc;n nhi &ecirc;n k &igrave;vĩ v &agrave;c &aacute;c quần thể di t &iacute;ch lịch sử trứ danh. H &atilde;y c &ugrave;ng Vietnam Booking thực hiện chuyến h &agrave;nh tr &igrave;nh kh &aacute;m ph &aacute;miền Trung với v &ocirc;v &agrave;n điều bất ngờ, hấp dẫn qua b &agrave;i viết dưới đ &acirc;y nh &eacute;!
+                                        Miền Trung có sức hấp dẫn đặc biệt khiến bất kỳ ai cũng muốn đặt chân đến một lần trong đời. Nơi đây hội tụ mọi vẻ đẹp của đất trời với ánh nắng sớm mai ấm áp, biển xanh, cát trắng và cả rừng núi hoang sơ, kỳ bí.
+
+Du lịch miền Trung còn thu hút đông đảo du khách bởi sự kết hợp hài hòa giữa cảnh sắc thiên nhiên kỳ vĩ và các quần thể di tích lịch sử trứ danh. Hãy cùng BugFreeTrip thực hiện chuyến hành trình khám phá miền Trung với vô vàn điều bất ngờ, hấp dẫn qua bài viết dưới đây nhé!
 
                                     </p>
                                     <h2 dir="ltr" style="text-align: justify;">
                                         <meta charset="utf-8"/>
                                     </h2>
                                     <h2 dir="ltr">
-                                        <b id="docs-internal-guid-8fdfce96-7fff-4132-1e91-4c0806a4b98a">Du lịch Mi &ecirc;̀n Trung vào thời đi &ecirc;̉m nào thích hợp?</b>
+                                        <b id="docs-internal-guid-8fdfce96-7fff-4132-1e91-4c0806a4b98a">Du lịch miền Trung vào thời điểm nào thích hợp?</b>
                                     </h2>
-                                    <p dir="ltr" style="text-align: justify;">Miền Trung l &agrave;khu vực nằm ở trung t &acirc;m phần l &atilde;nh thổ Việt Nam với c &aacute;c d &atilde;y n &uacute;i bao quanh từ Đ &ocirc;ng sang T &acirc;y c &ugrave;ng c &aacute;c b &atilde;i biển xinh đẹp trải d &agrave;i. Miền Trung được chia th &agrave;nh 3 khu vực ch &iacute;nh, bao gồm: Bắc Trung Bộ, Duy &ecirc;n hải Nam Trung Bộ, T &acirc;y Nguy &ecirc;n.
+                                    <p dir="ltr" style="text-align: justify;">Miền Trung là khu vực nằm ở trung tâm phần lãnh thổ Việt Nam với các dãy núi bao quanh từ Đông sang Tây, cùng những bãi biển xinh đẹp trải dài. Miền Trung được chia thành 3 khu vực chính, bao gồm: Bắc Trung Bộ, Duyên hải Nam Trung Bộ và Tây Nguyên.
 </p>
-                                    <p dir="ltr" style="text-align: justify;">Đặc trưng của kh &iacute;hậu miền Trung l &agrave;nắng n &oacute;ng v &agrave;mưa ẩm quanh năm. M &ugrave;a h &egrave;ở khu vực Bắc Trung Bộ sẽ c &oacute;thời tiết kh &ocirc;n &oacute;ng v &agrave;lạnh dần khi v &agrave;o m &ugrave;a đ &ocirc;ng. Trong khi đ &oacute;, ở v &ugrave;ng duy &ecirc;n hải Nam Trung Bộ th &igrave;kh &iacute;lạnh sẽ suy yếu dần v &igrave;bị d &atilde;y n &uacute;i Bạch M &atilde;cản trở. Thế nhưng, khu vực n &agrave;y vẫn phải chịu ảnh hưởng bởi gi &oacute;T &acirc;y Nam thổi qua n &ecirc;n duy &ecirc;n hải Nam Trung Bộ lu &ocirc;n n &oacute;ng quanh năm. Thời tiết T &acirc;y Nguy &ecirc;n lại c &oacute;hai m &ugrave;a r &otilde;rệt, l &agrave;m &ugrave;a mưa v &agrave;m &ugrave;a kh &ocirc;với sự ch &ecirc;nh lệch nhiệt độ rất lớn giữa ng &agrave;y v &agrave;đ &ecirc;m.
+                                    <p dir="ltr" style="text-align: justify;">Đặc trưng của khí hậu miền Trung là nắng nóng và mưa ẩm quanh năm. Mùa hè ở khu vực Bắc Trung Bộ thường có thời tiết khô nóng và trở lạnh dần khi vào mùa đông. Trong khi đó, ở vùng Duyên hải Nam Trung Bộ, khí lạnh sẽ suy yếu dần do bị dãy núi Bạch Mã cản trở. Tuy nhiên, khu vực này vẫn chịu ảnh hưởng bởi gió Tây Nam thổi qua nên Duyên hải Nam Trung Bộ luôn nóng quanh năm.
+
+Thời tiết ở Tây Nguyên lại có hai mùa rõ rệt: mùa mưa và mùa khô, với sự chênh lệch nhiệt độ rất lớn giữa ngày và đêm.
+
+
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung -  Du lịch Miền Trung vào thời điểm nào thích hợp" class="alignnone size-full wp-image-531488" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-1.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung -  Du lịch Miền Trung vào thời điểm nào thích hợp" class="alignnone size-full wp-image-531488" height="400" src="assets/img/mientrung1.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Cảnh sắc thi &ecirc;n nhi &ecirc;n h &ugrave;ng vĩ, hoang sơ của miền Trung lu &ocirc;n thu h &uacute;t đ &ocirc;ng đảo du kh &aacute;ch gh &eacute;thăm (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Cảnh sắc thiên nhiên hùng vĩ, hoang sơ của miền Trung luôn thu hút đông đảo du khách ghé thăm (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <p dir="ltr" style="text-align: justify;">
-                                        Theo kinh nghiệm đi<strong>tour du lịch miền Trung</strong>
-                                        , thời gian l &yacute;tưởng nhất để đi du lịch miền Trung ch &iacute;nh từ th &aacute;ng 1 đến th &aacute;ng 6 hằng năm. Bởi v &igrave;, thời điểm mưa lũ ở Bắc Trung Bộ thường k &eacute;o d &agrave;i từ th &aacute;ng 7 đến hết th &aacute;ng 10. Trong khi đ &oacute;, v &ugrave;ng duy &ecirc;n hải Nam Trung Bộ bắt đầu từ th &aacute;ng 10 đến hết th &aacute;ng 12. Do đ &oacute;, nếu đi du lịch miền Trung từ đầu th &aacute;ng 1 đến hết th &aacute;ng 6 th &igrave;sẽ đảm bảo an to &agrave;n cho du kh &aacute;ch.&nbsp;
+                                        Theo kinh nghiệm đi <strong>tour du lịch miền Trung</strong>
+                                        , thời gian lý tưởng nhất để khám phá nơi đây chính là từ tháng 1 đến tháng 6 hằng năm. Bởi vì thời điểm mưa lũ ở Bắc Trung Bộ thường kéo dài từ tháng 7 đến hết tháng 10. Trong khi đó, vùng Duyên hải Nam Trung Bộ bước vào mùa mưa từ tháng 10 đến hết tháng 12. Do đó, du lịch miền Trung từ đầu tháng 1 đến hết tháng 6 là khoảng thời gian an toàn, thuận lợi cho hành trình của bạn.
                                     </p>
                                     <h2 dir="ltr" style="text-align: justify;">
                                         <meta charset="utf-8"/>
                                     </h2>
                                     <h2 dir="ltr">
-                                        <b id="docs-internal-guid-f2ab8a61-7fff-6212-a8ed-dd0da99daaaa">C &acirc;̀n chu &acirc;̉n bị gì cho chuy &ecirc;́n du lịch Mi &ecirc;̀n Trung?</b>
+                                        <b id="docs-internal-guid-f2ab8a61-7fff-6212-a8ed-dd0da99daaaa">Cần chuẩn bị gì cho chuyến du lịch miền Trung?</b>
                                     </h2>
-                                    <p dir="ltr" style="text-align: justify;">Nhằm đảm bảo c &oacute;một chuyến du lịch miền Trung trọn vẹn niềm vui, du kh &aacute;ch cần lưu &yacute;một số vấn đề cần thiết. Điều n &agrave;y kh &ocirc;ng chỉ gi &uacute;p chuyến h &agrave;nh tr &igrave;nh của bạn diễn ra su &ocirc;n sẻ, thuận lợi m &agrave;c &ograve;n tr &aacute;nh những rắc rối kh &ocirc;ng đ &aacute;ng c &oacute;xuy &ecirc;n suốt qu &aacute;tr &igrave;nh di chuyển.&nbsp;</p>
+                                    <p dir="ltr" style="text-align: justify;">Nhằm đảm bảo có một chuyến du lịch miền Trung trọn vẹn niềm vui, du khách cần lưu ý một số vấn đề quan trọng. Điều này không chỉ giúp chuyến hành trình diễn ra suôn sẻ, thuận lợi mà còn tránh được những rắc rối không đáng có trong quá trình di chuyển.</p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <meta charset="utf-8"/>
                                     </h3>
                                     <h3 dir="ltr">
                                         <span style="color:#B22222;">
-                                            <b id="docs-internal-guid-0926c51f-7fff-8ae9-6dc1-53000a29b616">Giao th &ocirc;ng phương ti &ecirc;̣n đi lại</b>
+                                            <b id="docs-internal-guid-0926c51f-7fff-8ae9-6dc1-53000a29b616">Giao thông – Phương tiện đi lại</b>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Miền Trung đang c &oacute;sự đổi mới v &agrave;ph &aacute;t triển to &agrave;n diện về chất lượng dịch vụ v &agrave;du lịch. Ch &iacute;nh v &igrave;thế, phương tiện đi lại ở miền Trung v &ocirc;c &ugrave;ng đa dạng với nhiều h &igrave;nh thức kh &aacute;c nhau cho du kh &aacute;ch lựa chọn. Đến miền Trung, bạn ho &agrave;n to &agrave;n c &oacute;thể thu &ecirc;xe m &aacute;y, xe đạp, taxi, x &iacute;ch l &ocirc;hoặc du thuyền. T &ugrave;y thuộc v &agrave;o từng nhu cầu, sở th &iacute;ch c &aacute;nh &acirc;n m &agrave;bạn c &oacute;thể lựa chọn phương tiện di chuyển ưng &yacute;.
+                                    <p dir="ltr" style="text-align: justify;">Miền Trung đang có sự đổi mới và phát triển toàn diện về chất lượng dịch vụ và hạ tầng du lịch. Chính vì thế, phương tiện đi lại ở đây rất đa dạng với nhiều hình thức khác nhau cho du khách lựa chọn:
 </p>
                                     <ul>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>Thu &ecirc;xe đạp hoặc xe m &aacute;y: </strong>
-                                                Đ &acirc;y l &agrave;hai phương tiện di chuyển kh &ocirc;ng chỉ gi &uacute;p tiết kiệm tiền bạc m &agrave;c &ograve;n mang đến những trải nghiệm tốt nhất cho du kh &aacute;ch. Chỉ cần một chiếc xe m &aacute;y l &agrave;bạn c &oacute;thể vi vu v &ograve;ng quanh th &agrave;nh phố hoặc qua c &aacute;c tỉnh th &agrave;nh kh &aacute;c một c &aacute;ch dễ d &agrave;ng. C &aacute;c dịch vụ thu &ecirc;xe m &aacute;y, xe đạp thường cho thu &ecirc;theo giờ hoặc theo ng &agrave;y. Gi &aacute;thu &ecirc;xe cũng tương đối rẻ v &agrave;thủ tục nhận xe cũng kh &aacute;đơn giản. Bạn chỉ cần xuất tr &igrave;nh giấy chứng minh thư hoặc giấy tờ t &ugrave;y th &acirc;n l &agrave;đ &atilde;c &oacute;ngay một phương tiện đi lại để thỏa sức kh &aacute;m ph &aacute;mọi điểm đến.&nbsp;
+                                                <strong>Thuê xe đạp hoặc xe máy: </strong>
+                                               Đây là hai phương tiện không chỉ tiết kiệm chi phí mà còn mang đến trải nghiệm gần gũi, tự do khám phá. Các dịch vụ thuê xe thường tính theo giờ hoặc theo ngày, với mức giá hợp lý và thủ tục đơn giản. Du khách chỉ cần xuất trình giấy tờ tùy thân là có thể thuê xe dễ dàng.
                                             </p>
                                         </li>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>X &iacute;ch l &ocirc;: </strong>
-                                                Đ &acirc;y l &agrave;phương tiện di chuyển truyền thống d &agrave;nh cho những ai muốn trải nghiệm cuộc sống thường nhật. Xe x &iacute;ch l &ocirc;ng &agrave;y nay đ &atilde;c &oacute;nhiều cải tiến hấp dẫn về kiểu d &aacute;ng, m &agrave;u sắc c &ugrave;ng đệm ngồi thoải m &aacute;i. Do đ &oacute;, du kh &aacute;ch ho &agrave;n to &agrave;n y &ecirc;n t &acirc;m về chất lượng dịch vụ xuy &ecirc;n suốt qu &aacute;tr &igrave;nh di chuyển khi sử dụng dịch vụ thu &ecirc;x &iacute;ch l &ocirc;.
+                                                <strong>Xích lô: </strong>
+                                               Phù hợp với những ai muốn trải nghiệm không gian sống đời thường tại các thành phố miền Trung. Ngày nay, xe xích lô được cải tiến về kiểu dáng, màu sắc và độ thoải mái. Chất lượng dịch vụ cũng ngày càng chuyên nghiệp.
 		
                                             </p>
                                         </li>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>Taxi:</strong>
-                                                Taxi l &agrave;sự lựa chọn l &yacute;tưởng nếu bạn đi theo đo &agrave;n, nh &oacute;m hoặc những du kh &aacute;ch kh &ocirc;ng c &oacute;nhiều kinh nghiệm đi du lịch tự t &uacute;c. Tuy nhi &ecirc;n, chi ph &iacute;đi taxi tương đối cao so với c &aacute;c phương tiện kh &aacute;c. Ch &iacute;nh v &igrave;thế, taxi chỉ ph &ugrave;hợp với nh &oacute;m kh &aacute;ch đ &ocirc;ng người v &igrave;c &oacute;thể chia tiền thanh to &aacute;n cho mỗi người. Ưu điểm của taxi miền Trung l &agrave;c &aacute;c b &aacute;c t &agrave;i kh &aacute;th &acirc;n thiện, đ &uacute;ng giờ.
+                                                <strong>Taxi: </strong>
+                                                Là lựa chọn lý tưởng nếu bạn đi theo nhóm hoặc không quen du lịch tự túc. Tuy nhiên, chi phí taxi cao hơn so với các phương tiện khác, nên phù hợp hơn với nhóm đông người để chia sẻ chi phí. Một điểm cộng là tài xế taxi ở miền Trung thường rất thân thiện và đúng giờ.
 		
                                             </p>
                                         </li>
@@ -1011,7 +920,7 @@
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
                                                 <strong>Du thuyền:</strong>
-                                                Đối với c &aacute;c tỉnh th &agrave;nh ở khu vực duy &ecirc;n hải Nam Trung Bộ th &igrave;đ &acirc;y l &agrave;phương tiện di chuyển kh &ocirc;ng thể thiếu nếu du kh &aacute;ch muốn gh &eacute;thăm vịnh đảo. Một điều bất ngờ l &agrave;gi &aacute;th &agrave;nh du thuyền ở miền Trung kh &ocirc;ng qu &aacute;đắt đỏ như ch &uacute;ng ta thường nghĩ. V &igrave;thế, bạn c &oacute;thể c &acirc;n nhắc phương tiện đi lại n &agrave;y nếu c &oacute;nhu cầu kh &aacute;m ph &aacute;biển đảo miền Trung.&nbsp;
+                                                 Nếu bạn muốn tiết kiệm thì xe buýt là gợi ý hay. Các thành phố ở miền Trung đều có hệ thống xe buýt nội thành. Giá vé chỉ từ 7.000 – 20.000 VNĐ/lượt/người. Tuy nhiên, bạn cần tìm hiểu kỹ thông tin tuyến xe để đảm bảo đến đúng điểm tham quan.
                                             </p>
                                         </li>
                                     </ul>
@@ -1020,232 +929,233 @@
                                     </h3>
                                     <h3 dir="ltr">
                                         <span style="color:#B22222;">
-                                            <b id="docs-internal-guid-a60f983a-7fff-b9d9-9bd5-085f2449a952">Văn hóa &acirc;̉m thực tại Mi &ecirc;̀n Trung</b>
+                                            <b id="docs-internal-guid-a60f983a-7fff-b9d9-9bd5-085f2449a952">Văn hóa ẩm thực tại miền Trung</b>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Kh &ocirc;ng giống với những v &ugrave;ng miền kh &aacute;c, kh &iacute;hậu miền Trung khắc nghiệt quanh năm. Điều n &agrave;y c &oacute;sức ảnh hưởng kh &aacute;lớn đến đời sống tinh thần, t &iacute;nh c &aacute;ch v &agrave;ẩm thực miền Trung từ xưa đến nay. Văn h &oacute;a ẩm thực miền Trung l &agrave;sự c &acirc;n bằng ho &agrave;n hảo giữa nhiều hương vị đặc trưng kh &aacute;c nhau. Trong đ &oacute;, nổi bật nhất vẫn l &agrave;vị cay v &agrave;mặn v &igrave;hai hương vị n &agrave;y xuất hiện trong hầu hết c &aacute;c m &oacute;n ăn miền Trung.
+                                    <p dir="ltr" style="text-align: justify;">Không giống với các vùng miền khác, khí hậu miền Trung khắc nghiệt đã ảnh hưởng sâu sắc đến đời sống tinh thần, tính cách và cả ẩm thực nơi đây. Ẩm thực miền Trung nổi bật bởi sự cân bằng giữa nhiều hương vị đặc trưng, trong đó phổ biến nhất là vị cay và mặn.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - văn hóa ẩm thực của miền Trung" class="alignnone size-full wp-image-531489" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-2.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - văn hóa ẩm thực của miền Trung" class="alignnone size-full wp-image-531489" height="400" src="assets/img/amthucmientrung.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Ẩm thực miền Trung đa dạng với nhiều m &oacute;n ăn hấp dẫn đến từ nhiều tỉnh th &agrave;nh kh &aacute;c nhau (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Ẩm thực miền Trung đa dạng với nhiều món ăn hấp dẫn đến từ nhiều tỉnh thành khác nhau (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Người miền Trung cũng rất th &iacute;ch vị ngọt nhưng độ ngọt đều ở mức vừa phải. Ch &iacute;nh sự h &ograve;a hợp tinh tế giữa c &aacute;c hương vị truyền thống đ &atilde;khiến c &aacute;c m &oacute;n ăn miền Trung c &oacute;sức h &uacute;t kh &oacute;cưỡng trong l &ograve;ng thực kh &aacute;ch. Nếu bạn c &oacute;cơ hội đến miền Trung, du kh &aacute;ch nhất định kh &ocirc;ng thể bỏ qua những m &oacute;n đặc sản trứ danh như: B &uacute;n b &ograve;Huế, m &igrave;Quảng, b &aacute;nh hỏi l &ograve;ng heo,...
+                                    <p dir="ltr" style="text-align: justify;">Người miền Trung vẫn thích vị ngọt, nhưng vị ngọt thường ở mức vừa phải. Sự hòa quyện tinh tế giữa các hương vị tạo nên nét riêng khó cưỡng của món ăn miền Trung. Nếu có dịp đến đây, du khách nhất định không nên bỏ qua các món đặc sản nổi tiếng như: bún bò Huế, mì Quảng, bánh hỏi lòng heo...
 </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <meta charset="utf-8"/>
                                     </h3>
                                     <h3 dir="ltr">
                                         <span style="color:#B22222;">
-                                            <b id="docs-internal-guid-aac16901-7fff-cc5a-91b3-824befd39ea8">L &ecirc;n k &ecirc;́ hoạch cho chuy &ecirc;́n đi Mi &ecirc;̀n Trung</b>
+                                            <b id="docs-internal-guid-aac16901-7fff-cc5a-91b3-824befd39ea8">Lên kế hoạch cho chuyến đi miền Trung</b>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Việc l &ecirc;n kế hoạch cho một chuyến du lịch miền Trung một c &aacute;ch b &agrave;i bản, tỉ mỉ kh &ocirc;ng chỉ gi &uacute;p du kh &aacute;ch tiết kiệm được thời gian, tiền bạc m &agrave;c &ograve;n tr &aacute;nh được những ảnh hưởng của thời tiết. Dưới đ &acirc;y l &agrave;4 bước lập kế hoạch cơ bản của một chuyến đi miền Trung m &agrave;bạn cần n &ecirc;n biết:
+                                    <p dir="ltr" style="text-align: justify;">Việc lên kế hoạch chi tiết sẽ giúp bạn tiết kiệm thời gian, chi phí và tránh được những ảnh hưởng không mong muốn từ thời tiết. Dưới đây là 4 bước cơ bản để lập kế hoạch du lịch miền Trung hiệu quả:
 </p>
                                     <ul>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>X &aacute;c định thời gian lưu tr &uacute;v &agrave;thời điểm du lịch:</strong>
-                                                Trước ti &ecirc;n, bạn cần biết rằng chuyến du lịch miền Trung của bạn sẽ diễn ra trong bao l &acirc;u v &agrave;v &agrave;thời điểm n &agrave;o. Sau khi đ &atilde;x &aacute;c định được thời gian ch &iacute;nh x &aacute;c, bạn c &oacute;thể l &ecirc;n kế hoạch đặt v &eacute;xe v &agrave;ph &ograve;ng kh &aacute;ch sạn. Theo kinh nghiệm đi <strong>tour du lịch miền Trung</strong>
-                                                , du kh &aacute;ch n &ecirc;n hạn chế đến miền Trung v &agrave;o những ng &agrave;y cuối năm. Bởi v &igrave;đ &acirc;y l &agrave;thời điểm xuất hiện nhiều mưa b &atilde;o, gi &ocirc;ng gi &oacute;ở miền Trung. Nếu bạn đi du lịch miền Trung v &agrave;o khoảng thời gian n &agrave;y th &igrave;thời tiết sẽ ảnh hưởng rất lớn đến to &agrave;n bộ chuyến đi của bạn. Đặc biệt l &agrave;khu vực duy &ecirc;n hải Nam Trung Bộ thường xuy &ecirc;n c &oacute;b &atilde;o lớn.
+                                                <strong>Xác định thời gian lưu trú và thời điểm du lịch:</strong>
+                                                Trước tiên, bạn cần biết rằng chuyến du lịch miền Trung của bạn sẽ diễn ra trong bao lâu và vào thời điểm nào. Sau khi đã xác định được thời gian chính xác, bạn có thể lên kế hoạch đặt vé xe và phòng khách sạn. Theo kinh nghiệm đi <strong>tour du lịch miền Trung</strong>
+                                                , hãy quyết định rõ ràng bạn sẽ đi bao lâu, vào thời điểm nào trong năm. Hạn chế du lịch miền Trung vào cuối năm vì thời tiết thường xuất hiện mưa bão, đặc biệt là ở Duyên hải Nam Trung Bộ.
 		
                                             </p>
                                         </li>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>Đặt ph &ograve;ng kh &aacute;ch sạn ở miền Trung:</strong>
-                                                Hiện nay, c &oacute;rất nhiều dịch vụ lưu tr &uacute;với đa dạng h &igrave;nh thức kh &aacute;c nhau cho bạn tham khảo như: kh &aacute;ch sạn, homestay, nh &agrave;nghỉ. T &ugrave;y thuộc v &agrave;o nhu cầu, điều kiện kinh tế của mỗi người m &agrave;bạn c &oacute;thể lựa chọn cơ sở lưu tr &uacute;ri &ecirc;ng cho m &igrave;nh. Gi &aacute;th &agrave;nh của c &aacute;c dịch vụ lưu tr &uacute;ở miền Trung tương đối rẻ n &ecirc;n rất ph &ugrave;hợp với t &uacute;i tiền của mọi du kh &aacute;ch. Tuy nhi &ecirc;n, bạn n &ecirc;n đặt ph &ograve;ng trước 1 - 2 th &aacute;ng nhằm tr &aacute;nh t &igrave;nh trạng hết ph &ograve;ng. Đặc biệt l &agrave;trong những m &ugrave;a cao điểm của du lịch miền Trung.
+                                                <strong>Đặt phòng khách sạn:</strong>
+                                               Hiện nay có rất nhiều loại hình lưu trú như khách sạn, homestay, nhà nghỉ… với mức giá hợp lý. Bạn nên đặt phòng trước từ 1–2 tháng để tránh tình trạng “cháy phòng” vào mùa cao điểm.
 		
                                             </p>
                                         </li>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>Đặt v &eacute;m &aacute;y bay/xe du lịch/t &agrave;u hỏa: </strong>
-                                                Để đến c &aacute;c tỉnh th &agrave;nh miền Trung, du kh &aacute;ch c &oacute;thể chọn 1 trong 3 phương tiện di chuyển phổ biến như: m &aacute;y bay, xe du lịch hoặc t &agrave;u hỏa. Trong đ &oacute;, m &aacute;y bay l &agrave;phương tiện nhanh ch &oacute;ng v &agrave;tiện lợi nhất m &agrave;bạn c &oacute;thể c &acirc;n nhắc. C &ograve;n nếu bạn muốn tiết kiệm chi ph &iacute;du lịch th &igrave;c &oacute;thể lựa chọn di chuyển bằng xe du lịch hoặc t &agrave;u hỏa.
+                                                <strong>Đặt vé máy bay, xe khách hoặc tàu hỏa:  </strong>
+                                                Tùy vào ngân sách và thời gian mà bạn có thể chọn một trong ba phương tiện phổ biến. Máy bay là nhanh chóng và tiện lợi nhất; còn xe khách hoặc tàu hỏa là lựa chọn tiết kiệm chi phí.
 		
                                             </p>
                                         </li>
                                         <li aria-level="1" dir="ltr">
                                             <p dir="ltr" role="presentation" style="text-align: justify;">
-                                                <strong>Thiết lập lịch tr &igrave;nh du lịch:</strong>
-                                                Bước tiếp theo ch &iacute;nh l &agrave;x &aacute;c định những điểm tham quan m &agrave;bạn muốn đến, trải nghiệm m &agrave;bạn muốn thử trong những ng &agrave;y đi du lịch. Sau đ &oacute;, bạn h &atilde;y lưu lại những điểm đến v &agrave;trải nghiệm để tạo th &agrave;nh một lịch tr &igrave;nh thật ho &agrave;n chỉnh. Việc sắp xếp lịch tr &igrave;nh kh &ocirc;ng chỉ gi &uacute;p du kh &aacute;ch tiết kiệm thời gian m &agrave;c &ograve;n kiểm so &aacute;t được chi ti &ecirc;u.
+                                                <strong>Thiết lập lịch trình du lịch:</strong>
+                                                Hãy xác định những điểm đến, trải nghiệm muốn có và lên lịch trình rõ ràng. Điều này giúp bạn kiểm soát thời gian, chi tiêu và tận hưởng chuyến đi một cách trọn vẹn.
 		
                                             </p>
                                         </li>
                                     </ul>
                                     <p dir="ltr" role="presentation" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Lên kế hoạch cho chuyến đi Miền Trung" class="alignnone size-full wp-image-531490" height="420" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-3.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Lên kế hoạch cho chuyến đi Miền Trung" class="alignnone size-full wp-image-531490" height="420" src="assets/img/lenlichtrinhmientrung.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" role="presentation" style="text-align: center;">
-                                        <em>L &ecirc;n lịch tr &igrave;nh du lịch chi tiết sẽ gi &uacute;p chuyến đi của bạn th &ecirc;m phần thoải m &aacute;i, su &ocirc;n sẻ (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Lên lịch trình du lịch chi tiết sẽ giúp chuyến đi của bạn thêm phần thoải mái,suôn sẻ (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h2 dir="ltr" style="text-align: justify;">
                                         <meta charset="utf-8"/>
                                     </h2>
                                     <h2 dir="ltr">
-                                        <b id="docs-internal-guid-dfb28e64-7fff-5620-df28-e12130b57be5">M &ocirc;̣t s &ocirc;́ đi &ecirc;̉m tham quan hot tại Mi &ecirc;̀n Trung</b>
+                                        <b id="docs-internal-guid-dfb28e64-7fff-5620-df28-e12130b57be5">Một số điểm tham quan hot tại Miền Trung</b>
                                     </h2>
                                     <p dir="ltr" style="text-align: justify;">
-                                        Kh &ocirc;ng phải ngẫu nhi &ecirc;n m &agrave;c &aacute;c<strong>tour du lịch miền Trung</strong>
-                                        lu &ocirc;n c &oacute;một sức h &uacute;t kh &oacute;cưỡng trong cộng đồng c &aacute;c t &iacute;n đồ đam m &ecirc;&ldquo;x &ecirc;dịch &rdquo;. Cảnh sắc thi &ecirc;n nhi &ecirc;n h &ugrave;ng vĩ, quần thể di t &iacute;ch lịch sử đồ sộ, chi ph &iacute;du lịch rẻ, ẩm thực phong ph &uacute;l &agrave;những yếu tố h &agrave;ng đầu khiến nhiều du kh &aacute;ch muốn đến miền Trung nhiều đến thế. Nếu bạn đang t &igrave;m kiếm một điểm đến ấn tượng ở miền Trung th &igrave;nhất định kh &ocirc;ng thể bỏ qua những gợi &yacute;hấp dẫn dưới đ &acirc;y nh &eacute;!
+                                        Không phải ngẫu nhiên mà các<strong>tour du lịch miền Trung</strong>
+                                         luôn có sức hút đặc biệt đối với cộng đồng yêu thích “xê dịch”. Cảnh sắc thiên nhiên hùng vĩ, các quần thể di tích lịch sử đồ sộ, chi phí hợp lý và ẩm thực phong phú – tất cả đã làm nên sức hấp dẫn khó cưỡng của miền Trung.
 
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>1. Tour du lịch miền Trung - Thừa Thi &ecirc;n Huế</strong>
+                                            <strong>1. Tour du lịch miền Trung - Thừa Thiên Huế</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Huế lu &ocirc;n c &oacute;một sức l &ocirc;i cuốn kh &oacute;cưỡng khiến nhiều du kh &aacute;ch lưu luyến kh &ocirc;ng qu &ecirc;n khi trở về. Huế n &iacute;u ch &acirc;n du kh &aacute;ch bởi v &ugrave;ng đất Cố Đ &ocirc;trầm lắng, ho &agrave;i cổ nhưng lại rất đỗi thơ mộng. Huế sở hữu v &ocirc;v &agrave;n danh lam thắng cảnh cổ k &iacute;nh c &oacute;khả năng &ldquo;g &acirc;y thương nhớ &rdquo;cho những tr &aacute;i tim mơ mộng. Từ quần thể di t &iacute;ch Cố Đ &ocirc;trăm năm đến n &uacute;i Ngự B &igrave;nh, s &ocirc;ng Hương, Vịnh Lăng C &ocirc;&hellip;đều c &oacute;một sức h &uacute;t m &atilde;nh liệt khiến bất kỳ du kh &aacute;ch n &agrave;o cũng muốn đặt ch &acirc;n đến một lần.
+                                    <p dir="ltr" style="text-align: justify;">Huế luôn có một sức hút lôi cuốn khó cưỡng khiến nhiều du khách lưu luyến khó quên khi trở về.Huế níu chân khách du lịch bởi vùng đất Cố Đô trầm lắng,hoài cổ nhưng rất giỏi thơ mộng.Huế sở hữu vô vàng danh lam thắng cảnh cổ kính có khả năng"gây thương nhớ"cho những trái tim mơ mộng.Từ quần thế di tích Cố Đô trăm năm đến Núi Ngự Bình,Sông Hương,Vinh Lăng Cô....đều có một sức hút mãnh liệt khiến bất kì du khách nào cũng muốn đặt chân đến một lần.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Thừa Thiên Huế" class="alignnone size-full wp-image-531502" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-13.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Thừa Thiên Huế" class="alignnone size-full wp-image-531502" height="400" src="assets/img/Hue.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Vẻ đẹp thơ mộng của Huế v &agrave;o những buổi chiều t &agrave;(Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Vẻ đẹp thơ mộng của Huế vào những buổi chiều tà (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>2. Tour du lịch miền Trung - Quảng B &igrave;nh</strong>
+                                            <strong>2. Tour du lịch miền Trung - Quảng Bình</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Quảng B &igrave;nh hứa hẹn sẽ chuyến h &agrave;nh tr &igrave;nh kh &aacute;m ph &aacute;hang động với v &ocirc;v &agrave;n trải nghiệm bất ngờ, th &uacute;vị. Du kh &aacute;ch sẽ kh &ocirc;ng khỏi trầm trồ bởi khung cảnh thi &ecirc;n nhi &ecirc;n hoang sơ, h &ugrave;ng vĩ với những hang động huyền b &iacute;, d &atilde;y n &uacute;i tr &ugrave;ng điệp bao quanh. Một số điểm đến hấp dẫn nhất m &agrave;du kh &aacute;ch kh &ocirc;ng thể bỏ qua khi đến Quảng B &igrave;nh như: C &ocirc;ng vi &ecirc;n Ozo, Suối nước Moọc, B &atilde;i Đ &aacute;Nhảy, Biển Nhật Lệ,...
+                                    <p dir="ltr" style="text-align: justify;">Quảng Bình hứa hẹn sẽ là chuyến hành trình khám phá hang động với vô vàn trải nghiệm bất ngờ, thú vị. Du khách sẽ không khỏi trầm trồ bởi khung cảnh thiên nhiên hoang sơ, hùng vĩ với những hang động huyền bí, dãy núi trùng điệp bao quanh. Một số điểm đến hấp dẫn mà du khách không thể bỏ qua khi đến Quảng Bình như: Công viên Ozo, Suối nước Moọc, Bãi Đá Nhảy, biển Nhật Lệ,...
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Quảng Bình" class="alignnone size-full wp-image-531491" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-4.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Quảng Bình" class="alignnone size-full wp-image-531491" height="400" src="assets/img/quangbinh.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Kh &aacute;m ph &aacute;những hang động hoang sơ, huyền b &iacute;của Quảng B &igrave;nh (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Khám phá những hang động hoang sơ, huyền bí của Quảng Bình (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
                                             <strong>3. Tour du lịch miền Trung - Phố cổ Hội An</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Phố cổ Hội An thuộc địa phận của tỉnh Quảng Nam, tọa lạc b &ecirc;n cạnh s &ocirc;ng Thu Bồn thơ mộng. Nơi đ &acirc;y g &acirc;y ấn tượng cho đ &ocirc;ng đảo du kh &aacute;ch trong v &agrave;ngo &agrave;i nước bởi c &aacute;c c &ocirc;ng tr &igrave;nh kiến tr &uacute;c cổ độc đ &aacute;o. Phố cổ Hội An l &agrave;điểm đến hấp dẫn cho những ai y &ecirc;u th &iacute;ch kh &ocirc;ng gian ho &agrave;i cổ, tĩnh mịch.
+                                    <p dir="ltr" style="text-align: justify;">Phố cổ Hội An thuộc tỉnh Quảng Nam, tọa lạc bên dòng sông Thu Bồn thơ mộng. Nơi đây gây ấn tượng mạnh với du khách trong và ngoài nước nhờ các công trình kiến trúc cổ độc đáo. Phố cổ Hội An là điểm đến lý tưởng cho những ai yêu thích không gian hoài cổ, tĩnh lặng.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Phố cổ Hội An" class="alignnone size-full wp-image-531492" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-5.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Phố cổ Hội An" class="alignnone size-full wp-image-531492" height="400" src="assets/img/hoianmientrung.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Cảm nhận kh &ocirc;ng gian thanh b &igrave;nh, tĩnh mịch nơi phố cổ Hội An (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Cảm nhận không gian thanh bình, tĩnh mịch nơi phố cổ Hội An (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Sự giao thoa h &agrave;i h &ograve;a giữa c &aacute;c nền văn h &oacute;a kh &aacute;c nhau như Việt, Trung, Nhật v &agrave;Ch &acirc;u &Acirc;u đ &atilde;tạo n &ecirc;n vẻ đẹp rất ri &ecirc;ng cho phố cổ Hội An. Khi m &agrave;n đ &ecirc;m bu &ocirc;ng xuống, cả kh &ocirc;ng gian phố cổ Hội An sẽ ngập tr &agrave;n trong h &agrave;ng ngh &igrave;n &aacute;nh đ &egrave;n rực rỡ khiến bạn kh &ocirc;ng khỏi cho &aacute;ng ngợp.
+                                    <p dir="ltr" style="text-align: justify;">Sự giao thoa hài hòa giữa các nền văn hóa như Việt, Trung, Nhật và châu Âu đã tạo nên vẻ đẹp rất riêng cho Hội An. Khi màn đêm buông xuống, cả khu phố cổ sẽ rực rỡ trong ánh đèn lung linh, khiến du khách không khỏi choáng ngợp.
+
+
 </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>4. Tour du lịch miền Trung - Ph &uacute;Y &ecirc;n</strong>
+                                            <strong>4. Tour du lịch miền Trung - Phú Yên</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Ph &uacute;Y &ecirc;n l &agrave;một trong địa danh du lịch miền Trung được đ &ocirc;ng đảo du kh &aacute;ch &ldquo;săn đ &oacute;n &rdquo;trong thời gian gần đ &acirc;y. Đ &acirc;y l &agrave;điểm nghỉ dưỡng l &yacute;tưởng cho những ai y &ecirc;u th &iacute;ch biển xanh nắng v &agrave;ng v &agrave;những cơn gi &oacute;m &aacute;t rượi. Ph &uacute;Y &ecirc;n hấp dẫn du kh &aacute;ch thập phương bởi những ngọn đ &egrave;o nước ngọt trong veo, cung đường biển thơ mộng v &agrave;ẩm thực địa phương đặc sắc. Tất cả những n &eacute;t đặc sắc đ &oacute;đ &atilde;tạo n &ecirc;n một sức h &uacute;t đặc biệt cho xứ sở &ldquo;hoa v &agrave;ng tr &ecirc;n cỏ xanh &rdquo;.
+                                    <p dir="ltr" style="text-align: justify;">Phú Yên là một trong những điểm đến du lịch miền Trung được nhiều du khách “săn đón” trong thời gian gần đây. Đây là nơi nghỉ dưỡng lý tưởng cho những ai yêu thích biển xanh, nắng vàng và những làn gió mát lành. Phú Yên hấp dẫn với đèo nước ngọt trong veo, cung đường biển thơ mộng và ẩm thực địa phương đặc sắc.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Phú Yên" class="alignnone size-full wp-image-531493" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-6.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Phú Yên" class="alignnone size-full wp-image-531493" height="400" src="assets/img/phu yen.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Check-in với những điểm đến mới lạ, hấp dẫn chỉ c &oacute;tại Ph &uacute;Y &ecirc;n (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Check-in với những điểm đến mới lạ, hấp dẫn chỉ có tại Phú Yên (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
                                             <strong>5. Tour du lịch miền Trung - Quy Nhơn</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Sẽ thật đ &aacute;ng tiếc nếu bạn kh &ocirc;ng đến Quy Nhơn một lần trong chuyến du lịch miền Trung sắp tới! Quy Nhơn g &acirc;y thương nhớ bởi những cung đường biển tuyệt đẹp nằm n &eacute;p m &igrave;nh b &ecirc;n những d &atilde;y n &uacute;i h &ugrave;ng vĩ. Nếu c &oacute;dịp đến Quy Nhơn th &igrave;nhất định bạn phải tham quan c &aacute;c địa danh nổi tiếng như: Kỳ C &ograve;, Eo Gi &oacute;, đồi c &aacute;t Phương Mai, C &ugrave;Lao Xanh, Th &aacute;p Đ &ocirc;i Quy Nhơn,...
+                                    <p dir="ltr" style="text-align: justify;">Sẽ thật đáng tiếc nếu bạn bỏ qua Quy Nhơn trong chuyến du lịch miền Trung! Quy Nhơn ghi dấu ấn với những cung đường biển tuyệt đẹp, nép mình bên dãy núi hùng vĩ. Những điểm đến nổi bật bạn nên ghé qua gồm: Kỳ Co, Eo Gió, đồi cát Phương Mai, Cù Lao Xanh, tháp Đôi Quy Nhơn,...
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Quy Nhơn" class="alignnone size-full wp-image-531494" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-7.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Quy Nhơn" class="alignnone size-full wp-image-531494" height="400" src="assets/img/quynhon.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Ch &igrave;m đắm trong cảnh sắc thi &ecirc;n nhi &ecirc;n h &ugrave;ng vĩ ở Quy Nhơn (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Chìm đắm trong cảnh sắc thiên nhiên hùng vĩ ở Quy Nhơn (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>6. Tour du lịch miền Trung - Đ &agrave;Nẵng</strong>
+                                            <strong>6. Tour du lịch miền Trung - Đà Nẵng</strong>
                                         </span>
                                     </h3>
                                     <p dir="ltr" style="text-align: justify;">
-                                        Mặc d &ugrave;Đ &agrave;Nẵng lu &ocirc;n l &agrave;điểm đến rất quen thuộc trong c &aacute;c <strong>tour du lịch miền Trung</strong>
-                                        . Thế nhưng, &ldquo;th &agrave;nh phố đ &aacute;ng sống nhất Việt Nam &rdquo;lu &ocirc;n duy tr &igrave;sức h &uacute;t tr &ecirc;n bản đồ du lịch Việt Nam trong nhiều năm qua. Sự h &ograve;a quyện ho &agrave;n hảo giữa nhịp sống s &ocirc;i động của một th &agrave;nh phố hiện đại v &agrave;cảnh sắc thi &ecirc;n nhi &ecirc;n k &igrave;vĩ đ &atilde;tạo n &ecirc;n thương hiệu &ldquo;thi &ecirc;n đường du lịch biển &rdquo;cho Đ &agrave;Nẵng. Th &agrave;nh phố năng động Đ &agrave;Nẵng sở hữu v &ocirc;v &agrave;n c &aacute;c điểm đến hấp dẫn c &oacute;thể kể đến như: B &aacute;n đảo Sơn Tr &agrave;, B &agrave;N &agrave;Hills, b &atilde;i biển Mỹ Kh &ecirc;, Ngũ H &agrave;nh Sơn, đảo L &yacute;Sơn,...
+                                        Mặc dù Đà Nẵng luôn là điểm rất quen thuộc trong các <strong>tour du lịch miền Trung</strong>
+                                        .Thành phố này là sự hòa quyện hoàn hảo giữa nhịp sống hiện đại và cảnh sắc thiên nhiên kỳ vĩ, được mệnh danh là “thiên đường du lịch biển”. Các địa điểm nổi bật có thể kể đến như: Bán đảo Sơn Trà, Bà Nà Hills, bãi biển Mỹ Khê, Ngũ Hành Sơn, đảo Lý Sơn,...
 
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Đà Nẵng" class="alignnone size-full wp-image-531495" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-8.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Đà Nẵng" class="alignnone size-full wp-image-531495" height="400" src="assets/img/DNMienTrug.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Kh &aacute;m ph &aacute;cầu V &agrave;ng ở khu du lịch B &agrave;N &agrave;Hills - Một trong những c &ocirc;ng tr &igrave;nh kiến tr &uacute;c &nbsp;vang danh thế giới (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Khám phá Cầu Vàng ở khu du lịch Bà Nà Hills – Một công trình kiến trúc vang danh thế giới (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>7. Tour du lịch miền Trung - Đ &agrave;Lạt</strong>
+                                            <strong>7. Tour du lịch miền Trung - Đà Lạt</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Nhắc đến th &agrave;nh phố Đ &agrave;Lạt mộng mơ, điều g &igrave;sẽ hiện ra trong t &acirc;m tr &iacute;bạn đầu ti &ecirc;n? Đ &oacute;c &oacute;phải l &agrave;khung cảnh sương m &ugrave;giăng k &iacute;n lối v &agrave;những đồi th &ocirc;ng thơ mộng khiến bạn khắc khoải kh &ocirc;n ngu &ocirc;i khi nhớ về Đ &agrave;Lạt. Quả thật đ &uacute;ng như vậy, Đ &agrave;Lạt được thi &ecirc;n nhi &ecirc;n ưu &aacute;i cảnh sắc thi &ecirc;n nhi &ecirc;n n &ecirc;n thơ, l &atilde;ng mạn kết hợp với kh &iacute;hậu m &aacute;t mẻ, &ocirc;n h &ograve;a. Tất cả h &ograve;a quyện lại với nhau để tạo n &ecirc;n sức h &uacute;t kh &oacute;cưỡng cho xứ sở ng &agrave;n hoa xinh đẹp n &agrave;y.
+                                    <p dir="ltr" style="text-align: justify;">Nhắc đến Đà Lạt mộng mơ, bạn nghĩ đến điều gì đầu tiên? Có phải là sương mù giăng kín lối, đồi thông vi vu trong gió? Đà Lạt được thiên nhiên ưu ái với khí hậu mát mẻ, khung cảnh nên thơ, lãng mạn – là điểm đến lý tưởng cho những ai yêu thích sự yên bình.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Đà Lạt" class="alignnone size-full wp-image-531496" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-9.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Đà Lạt" class="alignnone size-full wp-image-531496" height="400" src="assets/img/datlat.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Tận hưởng kh &ocirc;ng gian mơ mộng, hữu t &igrave;nh tại xứ sở ng &agrave;n hoa Đ &agrave;Lạt (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Tận hưởng không gian mơ mộng, hữu tình tại xứ sở ngàn hoa Đà Lạt (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Nếu c &oacute;dịp đến Đ &agrave;Lạt, bạn nhất định kh &ocirc;ng thể bỏ qua c &aacute;c điểm đến hấp dẫn như: Thung lũng T &igrave;nh Y &ecirc;u, Quảng trường L &acirc;m Vi &ecirc;n, Ng &ocirc;i l &agrave;ng đất s &eacute;t, ga Đ &agrave;lạt, nh &agrave;thờ Con G &agrave;, n &uacute;i Langbiang,...
+                                    <p dir="ltr" style="text-align: justify;">Một số địa điểm nổi bật không thể bỏ qua: Thung lũng Tình Yêu, Quảng trường Lâm Viên, ngôi làng đất sét, ga Đà Lạt, nhà thờ Con Gà, núi Langbiang,...
 </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
-                                            <strong>8. Tour du lịch miền Trung - Bu &ocirc;n Ma Thuột</strong>
+                                            <strong>8. Tour du lịch miền Trung - Buôn Ma Thuột</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Bu &ocirc;n Ma Thuột l &agrave;v &ugrave;ng đất hội tụ mọi bản sắc văn h &oacute;a đặc trưng của đại ng &agrave;n T &acirc;y Nguy &ecirc;n. Khi đặt ch &acirc;n đến Đ &agrave;Lạt lần đầu ti &ecirc;n, nhiều du kh &aacute;ch kh &ocirc;ng khỏi cho &aacute;ng ngợp trước những c &aacute;nh đồng c &agrave;ph &ecirc;bạt ng &aacute;t xen lẫn với d &atilde;y n &uacute;i h &ugrave;ng vĩ, con th &aacute;c h &ugrave;ng vĩ, ngoạn mục.
+                                    <p dir="ltr" style="text-align: justify;">Buôn Ma Thuột là vùng đất hội tụ mọi nét văn hóa đặc trưng của đại ngàn Tây Nguyên. Du khách sẽ ngỡ ngàng trước những cánh đồng cà phê bạt ngàn, những con thác hùng vĩ xen lẫn dãy núi bao la.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Buôn Ma Thuột " class="alignnone size-full wp-image-531637" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-15.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Buôn Ma Thuột " class="alignnone size-full wp-image-531637" height="400" src="assets/img/buonmathuoc.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Kh &aacute;m ph &aacute;văn h &oacute;a T &acirc;y Nguy &ecirc;n đặc sắc tại Bu &ocirc;n Ma Thuột (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Khám phá văn hóa Tây Nguyên đặc sắc tại Buôn Ma Thuột (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Kh &ocirc;ng chỉ thế, đ &acirc;y c &ograve;n l &agrave;cơ hội tuyệt vời để du kh &aacute;ch c &oacute;thể t &igrave;m hiểu v &agrave;giao lưu văn h &oacute;a với đồng b &agrave;o d &acirc;n tộc thiểu số. Một số địa danh du lịch Bu &ocirc;n Ma Thuột trứ danh m &agrave;bạn nhất định phải kh &aacute;m ph &aacute;như: Bảo t &agrave;ng c &agrave;ph &ecirc;, L &agrave;ng c &agrave;ph &ecirc;Trung Nguy &ecirc;n, Bản Đ &ocirc;n,...
+                                    <p dir="ltr" style="text-align: justify;">Đây cũng là cơ hội tuyệt vời để tìm hiểu và giao lưu với đồng bào dân tộc thiểu số. Một số điểm đến nổi bật: Bảo tàng cà phê, Làng cà phê Trung Nguyên, Bản Đôn,...
 </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
                                             <strong>9. Tour du lịch miền Trung - Măng Đen</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Măng Đen nổi l &ecirc;n như một hiện tượng du lịch mới trong thời gian gần đ &acirc;y. Điểm đến mới toanh n &agrave;y thuộc địa phận của tỉnh Kon Tum, được biết đến l &agrave;cao nguy &ecirc;n h &ugrave;ng vĩ nằm tr &ecirc;n d &atilde;y Trường Sơn với độ cao tr &ecirc;n 1200 m &eacute;t. Măng Đen thu h &uacute;t đ &ocirc;ng đảo du kh &aacute;ch bởi cảnh sắc thi &ecirc;n nhi &ecirc;n thơ mộng, kh &ocirc;ng kh &iacute;m &aacute;t mẻ, dễ chịu v &agrave;những m &oacute;n ăn đặc sắc.
+                                    <p dir="ltr" style="text-align: justify;">Măng Đen (Kon Tum) nổi lên như một hiện tượng du lịch mới. Nằm trên dãy Trường Sơn ở độ cao hơn 1200m, nơi đây thu hút bởi cảnh sắc thơ mộng, khí hậu mát mẻ và ẩm thực đặc sắc.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Măng Đen" class="alignnone size-full wp-image-531498" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-11.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Măng Đen" class="alignnone size-full wp-image-531498" height="400" src="assets/img/mangden.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>Cho &aacute;ng ngợp trước vẻ đẹp ma mị, huyền b &iacute;nhưng rất đỗi n &ecirc;n thơ của Măng Đen (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Choáng ngợp trước vẻ đẹp ma mị, huyền bí nhưng rất đỗi nên thơ của Măng Đen (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Đối với những ai y &ecirc;u th &iacute;ch khung cảnh thi &ecirc;n nhi &ecirc;n thi vị, hữu t &igrave;nh th &igrave;Măng Đen ch &iacute;nh l &agrave;điểm nghỉ dưỡng kh &ocirc;ng thể tuyệt vời hơn. Một số điểm tham quan nổi tiếng ở Măng Đen m &agrave;nhất định bạn phải đến như: Th &aacute;c Pa Sỹ, Hồ Đăk Ke, Kon Bring, Tượng Đức Mẹ Măng Đen,...
+                                    <p dir="ltr" style="text-align: justify;">Một số điểm tham quan nổi bật tại Măng Đen: Thác Pa Sỹ, Hồ Đăk Ke, làng văn hóa Kon Bring, Tượng Đức Mẹ Măng Đen,...
 </p>
                                     <h3 dir="ltr" style="text-align: justify;">
                                         <span style="color:#B22222;">
                                             <strong>10. Tour du lịch miền Trung - Pleiku</strong>
                                         </span>
                                     </h3>
-                                    <p dir="ltr" style="text-align: justify;">Pleiku g &acirc;y cho &aacute;ng ngợp bởi phong cảnh n &ecirc;n thơ, l &atilde;ng mạn với những d &atilde;y n &uacute;i tr &ugrave;ng điệp, hồ nước tự nhi &ecirc;n trong vắt như pha l &ecirc;c &ugrave;ng nhiều c &ocirc;ng tr &igrave;nh kiến tr &uacute;c mang đậm bản sắc văn h &oacute;a T &acirc;y Nguy &ecirc;n. Đến với Pleiku, bạn sẽ cảm nhận được kh &ocirc;ng kh &iacute;m &aacute;t mẻ, dễ chịu h &ograve;a quyện với khung cảnh thơ mộng, hữu t &igrave;nh nơi đ &acirc;y. Tất cả tạo n &ecirc;n bức tranh thi &ecirc;n nhi &ecirc;n tinh kh &ocirc;i, hoang d &atilde;nhưng rất đỗi b &igrave;nh y &ecirc;n, thi vị của đại ng &agrave;n T &acirc;y Nguy &ecirc;n.
+                                    <p dir="ltr" style="text-align: justify;">Pleiku gây ấn tượng với phong cảnh nên thơ, lãng mạn, hồ nước trong vắt như pha lê và các công trình kiến trúc đậm đà bản sắc Tây Nguyên. Không khí mát mẻ và thiên nhiên hoang sơ tại đây mang đến cảm giác bình yên khó tả.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Pleiku" class="alignnone size-full wp-image-531499" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-12.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Pleiku" class="alignnone size-full wp-image-531499" height="400" src="assets/img/pleiku.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <em>H &ograve;a m &igrave;nh với cơn gi &oacute;m &aacute;t dịu v &agrave;chi &ecirc;m ngưỡng bức tranh phong cảnh n &ecirc;n thơ ở biển Hồ Pleiku (Nguồn ảnh: Sưu tầm)</em>
+                                        <em>Hòa mình trong làn gió mát dịu và chiêm ngưỡng bức tranh phong cảnh tuyệt đẹp ở Biển Hồ Pleiku (Nguồn ảnh: Sưu tầm)</em>
                                     </p>
-                                    <p dir="ltr" style="text-align: justify;">Nếu bạn vẫn chưa biết n &ecirc;n đi đ &acirc;u ở Pleiku th &igrave;c &oacute;thể tham quan một số địa danh nổi tiếng như: Biển Hồ Pleiku, Biển Hồ Ch &egrave;, Th &aacute;c Ch &iacute;n Tầng, nh &agrave;thờ Gỗ, Cầu treo Kon Klor, N &uacute;i lửa Chư Đăng Ya,...
+                                    <p dir="ltr" style="text-align: justify;">Gợi ý các điểm đến nổi bật: Biển Hồ Pleiku, Biển Hồ chè, Thác Chín Tầng, nhà thờ Gỗ, cầu treo Kon Klor, núi lửa Chư Đăng Ya,...
 </p>
                                     <h2 dir="ltr" style="text-align: justify;">
-                                        <strong>Đặt tour du lịch Mi &ecirc;̀n Trung ở đ &acirc;u?</strong>
+                                        <strong>Đặt tour du lịch miền Trung ở đâu?</strong>
                                     </h2>
-                                    <p dir="ltr" style="text-align: justify;">Với gần 15 năm kinh nghiệm trong lĩnh vực lữ h &agrave;nh, Vietnam Booking l &agrave;một trong những c &ocirc;ng ty du lịch h &agrave;ng đầu hiện nay. Vietnam Booking lu &ocirc;n được c &aacute;c kh &aacute;ch h &agrave;ng đ &aacute;nh gi &aacute;cao về chất lượng dịch vụ, gi &aacute;th &agrave;nh phải chăng, hệ thống đặt tour nhanh ch &oacute;ng, nh &acirc;n vi &ecirc;n tận t &acirc;m,... Đến với Vietnam Booking, qu &yacute;kh &aacute;ch ho &agrave;n to &agrave;n y &ecirc;n t &acirc;m về độ uy t &iacute;n, chuy &ecirc;n nghiệp của ch &uacute;ng t &ocirc;i. Ngo &agrave;i ra, Vietnam Booking lu &ocirc;n cập nhật li &ecirc;n tục c &aacute;c điểm đến mới nhất nhằm mang đến cho kh &aacute;ch h &agrave;ng sự lựa chọn đa dạng.
+                                    <p dir="ltr" style="text-align: justify;">Với gần 2 năm kinh nghiệm trong lĩnh vực lữ hành, BugFreeTrip là một trong những công ty du lịch hàng đầu hiện nay. Chúng tôi luôn được khách hàng đánh giá cao về chất lượng dịch vụ, giá cả hợp lý, hệ thống đặt tour nhanh chóng cùng đội ngũ nhân viên tận tâm, chuyên nghiệp.
 </p>
                                     <p dir="ltr" style="text-align: center;">
-                                        <img alt="tour du lịch miền Trung - Đặt tour du lịch miền Trung ở đâu" class="alignnone size-full wp-image-531506" height="400" src="https://www.vietnambooking.com/wp-content/uploads/2018/12/tour-du-lich-mien-trung-14.jpg" width="620"/>
+                                        <img alt="tour du lịch miền Trung - Đặt tour du lịch miền Trung ở đâu" class="alignnone size-full wp-image-531506" height="400" src="assets/img/mientrunganh2.jpg" width="620"/>
                                     </p>
                                     <p dir="ltr" style="text-align: justify;">
                                         Đối với <strong>tour du lịch miền Trung</strong>
-                                        , Vietnam Booking cho ra mắt nhiều tour du lịch mới với nhiều điểm đến hấp dẫn, trải nghiệm ấn tượng. Kh &ocirc;ng chỉ thế, qu &yacute;kh &aacute;ch sẽ được bao lo trọn g &oacute;i khi đặt<strong>tour du lịch miền Trung</strong>
-                                        tại Vietnam Booking, từ phương tiện di chuyển, c &aacute;c bữa ăn đến ph &ograve;ng kh &aacute;ch sạn c &ugrave;ng c &aacute;c dịch vụ k &egrave;m theo kh &aacute;c &hellip;&nbsp;
+                                        ,BugFreeTrip liên tục cập nhật các tour mới với điểm đến đa dạng, hấp dẫn và đầy trải nghiệm ấn tượng. Đặc biệt, quý khách sẽ được bao lo trọn gói từ phương tiện di chuyển, ăn uống, phòng khách sạn đến các dịch vụ đi kèm khác. Hãy yên tâm lựa chọn Vietnam Booking cho chuyến du lịch miền Trung sắp tới!
                                     </p>
                                    
                                         
@@ -1275,7 +1185,7 @@
                                         <ul class="list-group">
                                             
                                             <li class="list-group-item">
-                                                <a href="https://www.vietnambooking.com/du-lich/blog-du-lich/4-diem-den-moi-noi-o-mien-trung-cho-dip-tet-nguyen-dan.html">
+                                                <a href="MienTrung.html">
                                                     <div class="box-img">
                                                         <img alt="4 điểm đến mới nổi ở miền Trung cho dịp Tết Nguyên đán" src="https://www.vietnambooking.com/wp-content/uploads/2017/01/du-lich-trong-nuoc-1-18-9-2017.jpg"/>
                                                     </div>
@@ -1298,7 +1208,7 @@
                                             <div class="box-content">
                                                 <div class='box-name'>Mr.Minh Hoàng (Tour Đoàn)</div>
                                                 <div class='box-phone'>
-                                                    <a href='tel:123456789'>123456789</a>
+                                                    <a href='tel:0777425617'>0777425617</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -1309,9 +1219,9 @@
                                                 <i class="fas fa-phone-volume"></i>
                                             </div>
                                             <div class="box-content">
-                                                <div class='box-name'>Ms.Thị Nhi</div>
+                                                <div class='box-name'>Ms.Văn Hoàng</div>
                                                 <div class='box-phone'>
-                                                    <a href='tel:0931119254'>0931 119 254</a>
+                                                    <a href='tel:0387204225'>0387204225</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -1320,9 +1230,9 @@
                                                 <i class="fas fa-phone-volume"></i>
                                             </div>
                                             <div class="box-content">
-                                                <div class='box-name'>Mr.Văn Hoàng</div>
+                                                <div class='box-name'>Mr.Mạnh Hoài</div>
                                                 <div class='box-phone'>
-                                                    <a href='tel:0901996174'>0901 996 174</a>
+                                                    <a href='tel:0962808245'>0962808245</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -1331,9 +1241,9 @@
                                                 <i class="fas fa-phone-volume"></i>
                                             </div>
                                             <div class="box-content">
-                                                <div class='box-name'>Mr.Khánh Quốc</div>
+                                                <div class='box-name'>Mr.Mỹ Ngọc</div>
                                                 <div class='box-phone'>
-                                                    <a href='tel:0901966190'>0901 966 190</a>
+                                                    <a href='tel:0799433209'>0799433209</a>
                                                 </div>
                                             </div>
                                         </li>
@@ -1657,9 +1567,9 @@
             <div class="footer__row">
                 <div class="footer__col footer__col--large">
                     <img src="./assets/img/logo.png" alt="Logo" class="footer__logo">
-                    <p class="footer__desc">ABCTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                    <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                         Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                        Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng ABCTour.</p>
+                        Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.</p>
                     <div class="footer__inner-contact">
                         <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
                         <a href="https://www.youtube.com/" class="footer__contact-logo fab fa-youtube"></a>
@@ -1701,7 +1611,7 @@
         </div>
         <div class="footer__copyright">
             Copyright 2025 © by 
-            <a href="https://github.com/ledaithanhlong/DACS-FantaTour.git" style="text-decoration: none; color: #fff;">Trường CNTT và Truyền Thông Việt-Hàn</a>
+            <a href="https://www.facebook.com/vku.udn.vn?locale=vi_VN" style="text-decoration: none; color: #fff;">Trường CNTT và Truyền Thông Việt-Hàn</a>
         </div>
     </div>
 </footer>
@@ -1710,6 +1620,7 @@
     <!-- JS Files -->
     <script src="./assets/js/countdown.js"></script>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
 
 </body>
 </html>

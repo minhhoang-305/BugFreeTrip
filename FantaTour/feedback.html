@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback - FantaTour</title>
+    <title>Feedback - BugFreeTrip</title>
     <link rel="shortcut icon" href="./assets/img/logo-demo.png" type="image/x-icon">
 
 <!-- Google Fonts -->
@@ -25,7 +25,7 @@
 <script src="./assets/js/countdown.js"></script>
 <script src="./assets/js/main.js"></script>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
 
@@ -35,7 +35,7 @@
                     <div class="navbar-wrap row">
                         <!-- Logo -->
                         <div class="col l-2 m-6 c-6">
-                            <a href="index.html" class="header__logo-link">
+                            <a href="../index.html" class="header__logo-link">
                                 <img src="./assets/img/logo.png" alt="" class="header__logo-img">
                             </a>
                         </div>
@@ -44,7 +44,7 @@
                         <div class="col l-9 m-0 c-0">
                             <ul class="navbar__list ">
                                 <li class="navbar__item">
-                                    <a href="index.html" class="navbar__item-link">Trang chủ</a>
+                                    <a href="../index.html" class="navbar__item-link">Trang chủ</a>
                                 </li>
                                 <li class="navbar__item">
                                     <a href="#" class="navbar__item-link">Tour trong nước</a>
@@ -97,8 +97,8 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
-                                    <a href="login.html" class="navbar__item-link">Đăng nhập</a>
+                                <li class="navbar__item navbar__item--booking auth-container">
+                                            <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>
@@ -191,11 +191,11 @@
             <div class="feedback-section">
                 <h2>Phản hồi gần đây</h2>
                 <div class="feedback">
-                    <h3>Nguyễn Khánh Quốc</h3>
+                    <h3>Nguyễn Văn Hoàng</h3>
                     <div class="stars">★★★★★</div>
                     <p>"Chuyến đi đến Đà Nẵng thật sự ngoài mong đợi! Hướng dẫn viên nhiệt tình, lịch trình hợp lý và khách sạn rất đẹp. 
                         Đặc biệt, tôi cực kỳ thích Cầu Vàng – một địa điểm check-in không thể bỏ lỡ. Chắc chắn sẽ quay lại!"</p>
-                    <img src="assets/img/h.jpg" alt="Ảnh feedback" class="feedback-img">
+                    <img src="assets/img/hoangbin.jpg" alt="Ảnh feedback" class="feedback-img">
                     <div class="feedback-actions">
                         <button class="btn upvote">
                             <svg viewBox="0 0 24 24"><path d="M12 4l-8 8h5v8h6v-8h5z"></path></svg>
@@ -273,9 +273,9 @@
                     <div class="row">
                         <div class="col l-6 m-12 c-12">
                             <img src="./assets/img/logo.png" alt="" class="footer__logo">
-                            <p class="footer__desc">FantaTour luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
+                            <p class="footer__desc">BugFreeTrip luôn đồng hành cùng bạn trên mọi hành trình khám phá thế giới. 
                                 Chúng tôi cam kết mang đến những dịch vụ chất lượng, an toàn và trải nghiệm đáng nhớ. 
-                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng FantaTour.
+                                Hãy để mỗi chuyến đi trở thành một câu chuyện tuyệt vời cùng BugFreeTrip.
                             </p>
                             <div class="footer__inner-contact">
                                 <a href="https://x.com/" class="footer__contact-logo fab fa-twitter"></a>
@@ -458,6 +458,8 @@
              feedbackSection.appendChild(newFeedback);
         }
         </script>
-        
+          <script src="./assets/js/countdown.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
