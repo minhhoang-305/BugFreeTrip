@@ -61,7 +61,7 @@
     </style>
 </head>
 
-<body>
+<body onload="kiemtradangnhap();">
     <main class="wrapper">
         <header class="header">
             <!-- Navigation Bar -->
@@ -126,7 +126,7 @@
                                 <li class="navbar__item navbar__item--booking">
                                     <a href="DatTour.html" class="navbar__item-link">Đặt tour ngay</a>
                                 </li>
-                                <li class="navbar__item navbar__item--booking">
+                                <li class="navbar__item navbar__item--booking auth-container">
                                     <a href="login.html" class="navbar__item-link">Đăng nhập</a>
                                 </li>
                             </ul>
@@ -550,5 +550,9 @@
             setInterval(nextSlide, 5000);
             showSlide(currentSlide);
         </script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+<script src="./assets/js/script.js"></script>
 </body>
 </html>

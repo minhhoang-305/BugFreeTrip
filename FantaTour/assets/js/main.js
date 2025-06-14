@@ -17,9 +17,11 @@ const menuInput = document.getElementById('navbar__menu-input');
 
   document.addEventListener("DOMContentLoaded", function () {
     const images = [
-        "./assets/img/background.jpg",
-        "./assets/img/PuLuong.png",
-        "./assets/img/WHENVIETNAM0124.jpg",
+        "FantaTour/assets/img/ha-long-bay.jpg",
+        "FantaTour/assets/img/sapa1.jpg",
+        "FantaTour/assets/img/baibien-background.jpg",
+        "FantaTour/assets/img/cau-vang-da-nang-02.png",
+        "FantaTour/assets/img/CotCoLungCu.jpg",
     ];
 
     let currentIndex = 0;
@@ -39,7 +41,7 @@ const menuInput = document.getElementById('navbar__menu-input');
         }); 
     }
 
-    setInterval(changeBackground, 10000); // Đổi ảnh mỗi 10 giây
+    setInterval(changeBackground, 3000); // Đổi ảnh mỗi 10 giây
 });
 
   function showMessage(text, color = "green") {

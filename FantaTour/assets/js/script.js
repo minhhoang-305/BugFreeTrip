@@ -8,7 +8,9 @@ const firebaseConfig = {
     appId: "1:620088727553:web:36d5768da11677bf338800"
 };
 
-
+src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"
+src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"
+src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -92,7 +94,7 @@ mButton.addEventListener("click", async (e) => {
             showConfirmButton: false,
             timer: 1500
         }).then(() => {
-            window.location.href = "/FantaTour/index.html";
+            window.location.href = "/index.html";
         });
     } catch (error) {
         Swal.fire({ icon: 'error', title: 'Đăng nhập thất bại!', text: error.message });
@@ -150,7 +152,7 @@ googleLoginButton.addEventListener('click', async (e) => {
             showConfirmButton: false,
             timer: 1500
         }).then(() => {
-            window.location.href = "/DACS-FantaTour-main (2)/DACS-FantaTour-main/FantaTour/index.html";
+            window.location.href = "/index.html";
         });
     } catch (error) {
         Swal.fire({ icon: 'error', title: 'Lỗi Google Sign-In', text: error.message });
@@ -167,13 +169,15 @@ function kiemtradangnhap() {
             const authContainer = document.querySelector('.auth-container');
             if (authContainer) {
                 authContainer.innerHTML = `
-                    <a href="javascript:;" class="navbar__item-link">
-                        <span class="navbar__item-link">${user.displayName || data.name} <i class="fa-solid fa-caret-down"></i></span>
-                    </a>
-                    <ul class="navbar__subnav">
-                        <li class="subnav__item"><a href="javascript:;" onclick="myAccount()">Tài khoản của tôi</a></li>
-                        <li class="subnav__item"><a href="javascript:;" id="logout">Đăng xuất</a></li>
-                    </ul>
+                    <div class="navbar__item navbar__user-menu">
+                        <a href="javascript:;" class="navbar__item-link">
+                            ${user.displayName || data.name} <i class="fas fa-caret-down"></i>
+                        </a>
+                        <ul class="navbar__subnav user-dropdown">
+                            <li class="subnav__item"><a href="javascript:;" onclick="myAccount()">Tài khoản của tôi</a></li>
+                            <li class="subnav__item"><a href="javascript:;" id="logout">Đăng xuất</a></li>
+                        </ul>
+                    </div>
                 `;
                 document.getElementById('logout').addEventListener('click', logOut);
 
@@ -206,7 +210,7 @@ function myAccount() {
     userInfo();
 
     
-    window.location.href = "/DACS-FantaTour-main (2)/DACS-FantaTour-main/FantaTour/account.html";
+    window.location.href = "/FantaTour/account.html";
 
 }
 

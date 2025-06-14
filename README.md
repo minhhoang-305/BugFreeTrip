@@ -12,4 +12,4 @@
 | 24ITB052         | Ngô Phạm Minh Hoàng    | 
 | 24ITB053         | Nguyễn Văn Hoàng       | 
 | 24ITB049         | Phan Huy Mạnh Hoài     |
-| 24ITB127         | Trần Thị Mỹ Ngọc       |
+| 24ITB127         | Trần Lê Mỹ Ngọc        |
